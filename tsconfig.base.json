@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@dashy/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@dashy/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@dashy/secrets": ["libs/secrets/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
