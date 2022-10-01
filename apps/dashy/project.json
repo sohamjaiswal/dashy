@@ -1,0 +1,82 @@
+{
+  "name": "dashy",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dashy/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/dashy",
+        "index": "apps/dashy/src/index.html",
+        "baseHref": "/",
+        "main": "apps/dashy/src/main.tsx",
+        "polyfills": "apps/dashy/src/polyfills.ts",
+        "tsConfig": "apps/dashy/tsconfig.app.json",
+        "assets": ["apps/dashy/src/favicon.ico", "apps/dashy/src/assets"],
+        "styles": ["apps/dashy/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/dashy/src/environments/environment.ts",
+              "with": "apps/dashy/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "dashy:build",
+        "hmr": true,
+        "proxyConfig": "apps/dashy/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "dashy:build:development"
+        },
+        "production": {
+          "buildTarget": "dashy:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/dashy/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/dashy"],
+      "options": {
+        "jestConfig": "apps/dashy/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
