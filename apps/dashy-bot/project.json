@@ -1,0 +1,60 @@
+{
+  "name": "dashy-bot",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dashy-bot/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/dashy-bot",
+        "main": "apps/dashy-bot/src/main.ts",
+        "tsConfig": "apps/dashy-bot/tsconfig.app.json",
+        "assets": ["apps/dashy-bot/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/dashy-bot/src/environments/environment.ts",
+              "with": "apps/dashy-bot/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "dashy-bot:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "dashy-bot:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/dashy-bot/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/dashy-bot"],
+      "options": {
+        "jestConfig": "apps/dashy-bot/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
