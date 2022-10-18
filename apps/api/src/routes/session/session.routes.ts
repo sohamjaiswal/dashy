@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-const router = Router()
+const router = Router();
 
-router.route('/'). post().delete().patch()
+router.route("/").post().delete().patch();
 
-export default router
+export default router;

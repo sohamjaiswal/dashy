@@ -1,16 +1,16 @@
 /* eslint-disable */
 export default {
-  displayName: 'secrets',
-  preset: '../../jest.preset.js',
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
+    displayName: "secrets",
+    preset: "../../jest.preset.js",
+    globals: {
+        "ts-jest": {
+            tsconfig: "<rootDir>/tsconfig.spec.json",
+        },
     },
-  },
-  testEnvironment: 'node',
-  transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest',
-  },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/secrets',
+    testEnvironment: "node",
+    transform: {
+        "^.+\\.[tj]sx?$": "ts-jest",
+    },
+    moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
+    coverageDirectory: "../../coverage/libs/secrets",
 };

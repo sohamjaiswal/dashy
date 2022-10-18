@@ -1,18 +1,18 @@
 import { Client } from "guilded.js";
 
-import { BOT_TOKEN as token } from '@dashy/secrets';
+import { BOT_TOKEN as token } from "@dashy/secrets";
 
-const client = new Client({token})
+const client = new Client({ token });
 
 client.on("ready", () => {
-    console.log("Successfully logged in!")
-})
+    console.log("Successfully logged in!");
+});
 
 client.on("messageCreated", async (message) => {
-    if (message.content === 'ping') {
-        await message.reply("Pong!")
-        return
+    if (message.content === "ping") {
+        await message.reply("Pong!");
+        return;
     }
-})
+});
 
-client.login()
+client.login();
