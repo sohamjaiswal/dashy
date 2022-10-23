@@ -16,17 +16,17 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
-  cors({
-    origin: CORS_ORIGIN,
-    credentials: true,
-  })
+    cors({
+        origin: CORS_ORIGIN,
+        credentials: true,
+    })
 );
 app.use(
-  session({
-    secret: SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-  })
+    session({
+        secret: SESSION_SECRET,
+        resave: true,
+        saveUninitialized: true,
+    })
 );
 app.use(cookieParser(SESSION_SECRET));
 
@@ -36,11 +36,11 @@ app.use(router);
 const greeting: Message = { message: 'Welcome to api!' };
 
 app.get('/api-status', (req, res) => {
-  res.send(greeting);
+    res.send(greeting);
 });
 
 const port = PORT;
 const server = app.listen(port, () => {
-  Logger.info('Listening at http://localhost:' + port);
+    Logger.info('Listening at http://localhost:' + port);
 });
 server.on('error', console.error);

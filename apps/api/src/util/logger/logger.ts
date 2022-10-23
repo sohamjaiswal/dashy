@@ -10,20 +10,20 @@ import { environment } from '../../environments/environment';
 // ];
 
 const loggerArgs = environment.production
-  ? {
-      level: LOG_LEVEL,
-    }
-  : {
-      level: LOG_LEVEL,
-      transport: {
-        target: 'pino-pretty',
-        options: {
-          colorize: true,
-        },
-      },
-    };
+    ? {
+          level: LOG_LEVEL,
+      }
+    : {
+          level: LOG_LEVEL,
+          transport: {
+              target: 'pino-pretty',
+              options: {
+                  colorize: true,
+              },
+          },
+      };
 
 export const Logger = pino(
-  loggerArgs
-  //pino.multistream(streams)
+    loggerArgs
+    //pino.multistream(streams)
 );
