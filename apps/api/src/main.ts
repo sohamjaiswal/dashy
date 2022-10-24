@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Message } from '@dashy/api-interfaces';
-import { CORS_ORIGIN, PORT, SESSION_SECRET } from '@dashy/secrets';
+import { CORS_ORIGIN, MONGO_URI, PORT, SESSION_SECRET } from '@dashy/secrets';
 import { default as router } from './routes';
 
 import bodyParser = require('body-parser');
@@ -8,8 +8,17 @@ import cors = require('cors');
 import session = require('express-session');
 import cookieParser = require('cookie-parser');
 import { Logger } from './util/logger/logger';
+import { initPassport } from './middleware/auth/passport.auth';
+import passport = require('passport');
+import mongoose from 'mongoose';
 // import passport = require("passport");
 
+// Connect to DB
+mongoose.connect(MONGO_URI, () => {
+    Logger.info('MongoDB connected.');
+});
+
+// Start services
 const app = express();
 
 // Initialize middleware
@@ -29,6 +38,9 @@ app.use(
     })
 );
 app.use(cookieParser(SESSION_SECRET));
+initPassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Use Routes
 app.use(router);

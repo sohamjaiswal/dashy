@@ -81,19 +81,19 @@ class AuthLinkService {
                 Logger.error(err);
             })) as AxiosResponse;
         return res.data;
-    }
+    };
 
-    getServer = async (id: string, accessToken: string) => {
+    getServer = async (serverId: string, accessToken: string) => {
         const headers = {
             Authorization: `Bearer ${accessToken}`,
         };
         const res = (await axios
-            .get(this.url + `/servers/${id}`, { headers })
+            .get(this.url + `/servers/${serverId}`, { headers })
             .catch((err) => {
                 Logger.error(err);
             })) as AxiosResponse;
         return res.data;
-    }
+    };
 }
 
 export const authLinkService = new AuthLinkService(

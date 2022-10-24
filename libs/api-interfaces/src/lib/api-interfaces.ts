@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { FilterQuery, Schema } from 'mongoose';
 export interface Message {
     message: string;
 }
@@ -9,4 +9,36 @@ export interface IUser {
     username: string;
     password: string;
     validateCredentials: (password: string) => Promise<boolean>;
+}
+
+export interface IDbModelService<T> {
+    /**
+     * Create a new instance of the model
+     */
+    create: (props: Partial<T>) => Promise<T>;
+
+    /**
+     * Delete an instance of the model
+     */
+    deleteById: (id: Schema.Types.ObjectId) => Promise<T>;
+
+    /**
+     * Get a single entity that matches the query
+     */
+    findOne: (query: FilterQuery<T>) => Promise<T>;
+
+    /**
+     * Get all entities that match the query
+     */
+    findMany: (query: FilterQuery<T>) => Promise<T[]>;
+
+    /**
+     * Find one by ID
+     */
+    findById: (id: Schema.Types.ObjectId) => Promise<T>;
+
+    /**
+     * Update one by id
+     */
+    updateById: (id: Schema.Types.ObjectId, props: Partial<T>) => Promise<T>;
 }
