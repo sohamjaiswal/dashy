@@ -1,0 +1,30 @@
+{
+    "name": "dashy-components-e2e",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/dashy-components-e2e/src",
+    "projectType": "application",
+    "targets": {
+        "e2e": {
+            "executor": "@nrwl/cypress:cypress",
+            "options": {
+                "cypressConfig": "apps/dashy-components-e2e/cypress.config.ts",
+                "devServerTarget": "dashy-components:storybook",
+                "testingType": "e2e"
+            },
+            "configurations": {
+                "ci": {
+                    "devServerTarget": "dashy-components:storybook:ci"
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/dashy-components-e2e/**/*.{js,ts}"]
+            }
+        }
+    },
+    "tags": [],
+    "implicitDependencies": ["dashy-components"]
+}

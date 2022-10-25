@@ -1,0 +1,17 @@
+@import "../../../../common/common.scss";
+.textInput {
+  width: 100%;
+  $padding: 1rem;
+  .box {
+    width: calc(100% - 2 * $padding);
+    padding: $padding;
+    input {
+      border: none;
+      width: 100%;
+      font-family: Poppins;
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: #6f6f6f;
+    }
+  }
+}
