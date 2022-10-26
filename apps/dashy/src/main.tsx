@@ -27,11 +27,11 @@ const router = createBrowserRouter([
         path: '/register',
         element: (
             <RegisterForm
-                heading="Login"
+                heading="Sign Up"
                 eMail="e-Mail"
-                username='Username'
+                username="Username"
                 password="Password"
-                confPassword='Confirm Password'
+                confPassword="Confirm Password"
                 submit="Submit"
             />
         ),
