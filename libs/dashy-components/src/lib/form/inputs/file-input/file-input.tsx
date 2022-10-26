@@ -2,6 +2,7 @@ import React from "react";
 import { IFileInputProps } from "./file-input.types";
 
 import "./file-input.scss";
+// TODO FIX THIS
 
 export const FileInput = ({ onChange }: IFileInputProps) => {
   return (
@@ -12,7 +13,7 @@ export const FileInput = ({ onChange }: IFileInputProps) => {
         type={"file"}
         accept="image/*"
         style={{ marginLeft: "3rem" }}
-        onChange={(e) => onChange(URL.createObjectURL(e.target.files[0]))}
+        // onChange={(e) => onChange(URL.createObjectURL(e.target.files[0]))}
       />
     </div>
   );

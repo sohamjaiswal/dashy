@@ -8,12 +8,17 @@ import {
   } from "react-router-dom";
 
 import App from './app/app';
+import { LoginForm } from './forms/login';
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />
     },
+    {
+        path: "/login",
+        element: <LoginForm heading='Login' eMail='e-Mail' password='Password' submit='Submit' />
+    }
 ])
 
 const root = ReactDOM.createRoot(
