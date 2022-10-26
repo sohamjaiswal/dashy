@@ -1,5 +1,5 @@
-import { ReactChildren } from "react";
+import { ReactChildren } from 'react';
 
 export interface IBoxProps {
-  children: JSX.Element | JSX.Element[];
+    children: JSX.Element | JSX.Element[];
 }

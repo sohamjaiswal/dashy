@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react';
 
 export interface ISectionProps {
-  heading: string;
-  content: ReactElement;
+    heading: string;
+    content: ReactElement;
 }

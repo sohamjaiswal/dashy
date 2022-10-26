@@ -1,24 +1,24 @@
-@import "../../../../common/common.scss";
+@import '../../../../common/common.scss';
 .textAreaInput {
-  width: 100%;
-  $padding: 1rem;
-  .box {
-    width: calc(100% - 2 * $padding);
-    padding: $padding;
-    display: flex;
-    flex-direction: column;
-    textarea {
-      border: none;
-      width: 100%;
-      font-family: Poppins;
-      font-weight: 500;
-      font-size: 1.5rem;
-      color: #6f6f6f;
-      resize: none;
+    width: 100%;
+    $padding: 1rem;
+    .box {
+        width: calc(100% - 2 * $padding);
+        padding: $padding;
+        display: flex;
+        flex-direction: column;
+        textarea {
+            border: none;
+            width: 100%;
+            font-family: Poppins;
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: #6f6f6f;
+            resize: none;
+        }
+        .counter {
+            align-self: flex-end;
+            width: fit-content;
+        }
     }
-    .counter {
-      align-self: flex-end;
-      width: fit-content;
-    }
-  }
 }

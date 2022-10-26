@@ -1,25 +1,28 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
-import {
-    createBrowserRouter,
-    RouterProvider,
-    Route,
-  } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 
 import App from './app/app';
 import { LoginForm } from './forms/login';
 
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <App />
+        path: '/',
+        element: <App />,
     },
     {
-        path: "/login",
-        element: <LoginForm heading='Login' eMail='e-Mail' password='Password' submit='Submit' />
-    }
-])
+        path: '/login',
+        element: (
+            <LoginForm
+                heading="Login"
+                eMail="e-Mail"
+                password="Password"
+                submit="Submit"
+            />
+        ),
+    },
+]);
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

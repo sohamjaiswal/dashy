@@ -1,5 +1,5 @@
-import { SyntheticEvent } from "react";
+import { SyntheticEvent } from 'react';
 export interface IFormProps {
-  children: JSX.Element | JSX.Element[];
-  onSubmit: (e: SyntheticEvent) => void;
+    children: JSX.Element | JSX.Element[];
+    onSubmit: (e: SyntheticEvent) => void;
 }

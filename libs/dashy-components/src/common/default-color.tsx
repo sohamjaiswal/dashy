@@ -1,4 +1,4 @@
-import { navyBlue, shadyOrange, paradisePink, caribbeanGreen } from "./colors";
+import { navyBlue, shadyOrange, paradisePink, caribbeanGreen } from './colors';
 
 export const primaryButtonColor: string = navyBlue;
 export const secondaryButtonColor: string = shadyOrange;

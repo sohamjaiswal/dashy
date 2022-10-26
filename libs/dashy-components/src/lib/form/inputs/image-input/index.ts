@@ -1,1 +1,1 @@
-export { ImageInput } from "./image-input";
+export { ImageInput } from './image-input';
