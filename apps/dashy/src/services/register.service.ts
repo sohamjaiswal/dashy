@@ -12,9 +12,6 @@ export const register = async (
         username,
         password,
     };
-    const res = await axios.post<Partial<IUser>>(
-        `${BACKEND_LOC}/users/login`,
-        data
-    );
+    const res = await axios.post<Partial<IUser>>(`${BACKEND_LOC}/users`, data);
     return res;
 };

@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './app/app';
 import { LoginForm } from './forms/login';
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         path: '/register',
         element: (
             <RegisterForm
-                heading="Sign Up"
+                heading="Register"
                 eMail="e-Mail"
                 username="Username"
                 password="Password"

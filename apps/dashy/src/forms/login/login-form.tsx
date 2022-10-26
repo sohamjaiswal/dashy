@@ -36,7 +36,10 @@ export const LoginForm = ({ heading, eMail, password, submit }: ILoginForm) => {
                 type={'password'}
             />
             <SubmitInput
-                button={{ typography: { label: submit }, onClick: () => null }}
+                button={{
+                    typography: { label: submit, color: 'white' },
+                    onClick: () => null,
+                }}
             />
         </Form>
     );
