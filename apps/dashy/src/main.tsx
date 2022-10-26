@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 
 import App from './app/app';
 import { LoginForm } from './forms/login';
+import { RegisterForm } from './forms/register';
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,19 @@ const router = createBrowserRouter([
                 heading="Login"
                 eMail="e-Mail"
                 password="Password"
+                submit="Submit"
+            />
+        ),
+    },
+    {
+        path: '/register',
+        element: (
+            <RegisterForm
+                heading="Login"
+                eMail="e-Mail"
+                username='Username'
+                password="Password"
+                confPassword='Confirm Password'
                 submit="Submit"
             />
         ),
