@@ -1,1 +1,1 @@
-export { BigBox } from "./big-box";
+export { BigBox } from './big-box';

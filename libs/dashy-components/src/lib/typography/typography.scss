@@ -1,12 +1,12 @@
-@import "../../common/common.scss";
+@import '../../common/common.scss';
 
 .typography {
-  width: fit-content;
-  font-family: Poppins;
-  &.italic {
-    font-style: italic;
-  }
-  &.onClick {
-    cursor: pointer;
-  }
+    width: fit-content;
+    font-family: Poppins;
+    &.italic {
+        font-style: italic;
+    }
+    &.onClick {
+        cursor: pointer;
+    }
 }

@@ -1,1 +1,1 @@
-export { SubmitInput } from "./submit-input";
+export { SubmitInput } from './submit-input';

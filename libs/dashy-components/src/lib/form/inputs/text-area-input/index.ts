@@ -1,1 +1,1 @@
-export { TextAreaInput } from "./text-area-input";
+export { TextAreaInput } from './text-area-input';

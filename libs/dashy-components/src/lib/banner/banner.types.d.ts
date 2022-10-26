@@ -1,4 +1,4 @@
 export interface IBannerProps {
-  image: string;
-  size?: number;
+    image: string;
+    size?: number;
 }
