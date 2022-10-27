@@ -11,6 +11,13 @@ export interface IUser {
     validateCredentials: (password: string) => Promise<boolean>;
 }
 
+export interface IError {
+    error: {
+        status: number;
+        message: string;
+    };
+}
+
 export interface IDbModelService<T> {
     /**
      * Create a new instance of the model

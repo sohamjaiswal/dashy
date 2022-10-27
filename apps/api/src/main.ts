@@ -11,6 +11,7 @@ import { Logger } from './util/logger/logger';
 import { initPassport } from './middleware/auth/passport.auth';
 import passport = require('passport');
 import mongoose from 'mongoose';
+import { expressErrorHandler } from './middleware/handlers/error.handler';
 // import passport = require("passport");
 
 // Connect to DB
@@ -44,6 +45,9 @@ app.use(passport.session());
 
 // Use Routes
 app.use(router);
+
+// Handle Errors
+app.use(expressErrorHandler);
 
 const greeting: Message = { message: 'Welcome to api!' };
 

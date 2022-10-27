@@ -2,22 +2,24 @@ import { IUser } from '@dashy/api-interfaces';
 import { model, Schema } from 'mongoose';
 
 import bcrypt = require('bcryptjs');
+import { mongooseErrorHandler } from '../../util/db/error-handler';
 
 const UserSchema = new Schema({
     email: {
         type: String,
-        required: true,
-        unique: true,
+        required: [true, 'Enter an email.'],
+        unique: [true, 'That email is already in use.'],
         validate: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
     },
     password: {
         type: String,
-        required: true,
+        required: [true, 'Enter a password.'],
+        minLength: [4, 'Password should atleast be 4 characters.'],
     },
     username: {
         type: String,
-        unique: true,
-        required: true,
+        required: [true, 'Enter a username.'],
+        unique: [true, 'That username is already in use.'],
     },
 });
 
@@ -35,5 +37,7 @@ UserSchema.pre(
         }
     }
 );
+
+UserSchema.post('save', mongooseErrorHandler);
 
 export const User = model<IUser>('User', UserSchema);

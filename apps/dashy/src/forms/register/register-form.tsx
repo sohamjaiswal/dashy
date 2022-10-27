@@ -1,10 +1,13 @@
+import { IError } from '@dashy/api-interfaces';
 import {
     Form,
     SubmitInput,
     TextInput,
     Typography,
 } from '@dashy/dashy-components';
+import { AxiosResponse } from 'axios';
 import React, { SyntheticEvent, useState } from 'react';
+import { toast } from 'react-toastify';
 import { register } from '../../services/register.service';
 import { IRegisterForm } from './register-form.types';
 
@@ -25,9 +28,13 @@ export const RegisterForm = ({
         e.preventDefault();
         if (pass === confPass) {
             const res = await register(email, userName, password);
-            console.log(res);
+            if ((res as AxiosResponse<IError>).data.error.status === 409) {
+                toast.error(
+                    `${(res as AxiosResponse<IError>).data.error.message}`
+                );
+            }
         } else {
-            console.log('Passwords do not match.');
+            toast.warn('Passwords do not match.');
         }
     };
 
