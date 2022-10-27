@@ -1,4 +1,4 @@
-import { IError } from '@dashy/api-interfaces';
+import { IError, IUser } from '@dashy/api-interfaces';
 import {
     Form,
     SubmitInput,
@@ -7,9 +7,10 @@ import {
 } from '@dashy/dashy-components';
 import { AxiosResponse } from 'axios';
 import React, { SyntheticEvent, useState } from 'react';
-import { toast } from 'react-toastify';
+import { Toasts } from '../../helpers/toasts';
 import { register } from '../../services/register.service';
 import { IRegisterForm } from './register-form.types';
+import { isError } from '../../helpers/error.identifier';
 
 export const RegisterForm = ({
     heading,
@@ -28,13 +29,19 @@ export const RegisterForm = ({
         e.preventDefault();
         if (pass === confPass) {
             const res = await register(email, userName, password);
-            if ((res as AxiosResponse<IError>).data.error.status === 409) {
-                toast.error(
-                    `${(res as AxiosResponse<IError>).data.error.message}`
-                );
+            if (isError(res.data)) {
+                if ((res as AxiosResponse<IError>).data.error.status === 409) {
+                    Toasts.error(
+                        `😭 ${
+                            (res as AxiosResponse<IError>).data.error.message
+                        }`
+                    );
+                }
+            } else if (res as AxiosResponse<Partial<IUser>>) {
+                Toasts.info('🎉 Account creation successful');
             }
         } else {
-            toast.warn('Passwords do not match.');
+            Toasts.warn('😕 Passwords do not match.');
         }
     };
 
