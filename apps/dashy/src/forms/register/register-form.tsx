@@ -11,6 +11,7 @@ import { Toasts } from '../../helpers/toasts';
 import { register } from '../../services/register.service';
 import { IRegisterForm } from './register-form.types';
 import { isError } from '../../helpers/error.identifier';
+import { useNavigate } from 'react-router-dom';
 
 export const RegisterForm = ({
     heading,
@@ -23,6 +24,8 @@ export const RegisterForm = ({
     ...props
 }: IRegisterForm) => {
     const classNames = ['registerForm', className].join(' ');
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
@@ -43,6 +46,7 @@ export const RegisterForm = ({
                 }
             } else if (res as AxiosResponse<Partial<IUser>>) {
                 Toasts.info('🎉 Account creation successful');
+                setTimeout(() => navigate('/login'), 1500);
             }
         } else {
             Toasts.warn('😕 Passwords do not match.');

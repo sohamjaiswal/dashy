@@ -1,16 +1,20 @@
 ---
-name: Pull Request
-about: What is this PR/MR about?
+name: Feature request
+about: Suggest an idea for this project
 title: ""
 labels: ""
 assignees: ""
 ---
 
-**Is your PR request related to a bug/new feat issue? If yes, please mention else, please describe.**
+**Is your feature request related to a problem? Please describe.**
 
 <!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when [...] -->
 
-**Mention the highlights of your exquisite code here, fancy logic is discouraged though**
+**Describe the solution you'd like**
+
+<!-- A clear and concise description of what you want to happen. -->
+
+**Describe alternatives you've considered**
 
 <!-- A clear and concise description of any alternative solutions or features you've considered. -->
 
