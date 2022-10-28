@@ -4,6 +4,7 @@ import { Schema } from 'mongoose';
 import { IUser } from '@dashy/api-interfaces';
 import { UsersService } from '../../services/base-model.service';
 import { sanitizeObject } from '../../util/helpers/sanitize';
+import { isEmptyObj } from '../../util/helpers/check-empty';
 
 /**
  * Sign up a user

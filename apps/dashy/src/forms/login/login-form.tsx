@@ -5,9 +5,12 @@ import {
     Typography,
 } from '@dashy/dashy-components';
 import React, { useState } from 'react';
-import { login } from '../../services/login.service';
+
 import { ILoginForm } from './login-form.types';
 import { SyntheticEvent } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+import { loginController } from '../../controllers/login.controller';
 
 export const LoginForm = ({
     heading,
@@ -17,13 +20,17 @@ export const LoginForm = ({
     className,
     ...props
 }: ILoginForm) => {
+    const navigate = useNavigate();
     const classNames = ['loginForm', className].join(' ');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
-        const res = await login(email, pass);
-        console.log(res);
+        const res = await loginController(email, password);
+        if (res.success) {
+            setTimeout(() => navigate('/dashboard'), 1500);
+            return;
+        }
     };
     return (
         <Form onSubmit={handleSubmit} className={classNames} {...props}>

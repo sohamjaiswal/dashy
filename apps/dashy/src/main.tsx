@@ -2,10 +2,13 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { StoreProvider, createStore } from 'easy-peasy';
 
 import { App } from './app';
 import { LoginPage } from './pages/login';
 import { RegisterPage } from './pages/register';
+import data from './data';
+import DashboardPage from './pages/dashboard/dashboard.page';
 
 const router = createBrowserRouter([
     {
@@ -52,15 +55,23 @@ const router = createBrowserRouter([
                     />
                 ),
             },
+            {
+                path: 'dashboard',
+                element: <DashboardPage />,
+            },
         ],
     },
 ]);
+
+const store = createStore(data);
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <StrictMode>
-        <RouterProvider router={router} />
+        <StoreProvider store={store}>
+            <RouterProvider router={router} />
+        </StoreProvider>
     </StrictMode>
 );
