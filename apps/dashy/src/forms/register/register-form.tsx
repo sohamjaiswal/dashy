@@ -19,7 +19,11 @@ export const RegisterForm = ({
     password,
     confPassword,
     submit,
+    className,
+    ...props
 }: IRegisterForm) => {
+    const classNames = ['registerForm', className].join(' ');
+
     const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
     const [pass, setPass] = useState('');
@@ -46,7 +50,7 @@ export const RegisterForm = ({
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className={classNames} {...props}>
             <Typography label={heading} weight={900} size={4} />
             <TextInput
                 required

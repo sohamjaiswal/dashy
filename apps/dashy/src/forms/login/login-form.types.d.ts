@@ -3,4 +3,5 @@ export interface ILoginForm {
     eMail: string;
     password: string;
     submit: string;
+    className?: string;
 }

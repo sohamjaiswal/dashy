@@ -9,7 +9,15 @@ import { login } from '../../services/login.service';
 import { ILoginForm } from './login-form.types';
 import { SyntheticEvent } from 'react';
 
-export const LoginForm = ({ heading, eMail, password, submit }: ILoginForm) => {
+export const LoginForm = ({
+    heading,
+    eMail,
+    password,
+    submit,
+    className,
+    ...props
+}: ILoginForm) => {
+    const classNames = ['loginForm', className].join(' ');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const handleSubmit = async (e: SyntheticEvent) => {
@@ -18,7 +26,7 @@ export const LoginForm = ({ heading, eMail, password, submit }: ILoginForm) => {
         console.log(res);
     };
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className={classNames} {...props}>
             <Typography label={heading} weight={900} size={4} />
             <TextInput
                 required

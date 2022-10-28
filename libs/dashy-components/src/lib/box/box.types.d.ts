@@ -1,5 +1,6 @@
-import { ReactChildren } from 'react';
+import { HTMLAttributes } from 'react';
 
-export interface IBoxProps {
+export interface IBoxProps extends HTMLAttributes<HTMLDivElement> {
     children: JSX.Element | JSX.Element[];
+    className?: string;
 }

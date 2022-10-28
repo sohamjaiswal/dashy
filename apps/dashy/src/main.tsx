@@ -4,8 +4,8 @@ import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { App } from './app';
-import { LoginForm } from './forms/login';
-import { RegisterForm } from './forms/register';
+import { LoginPage } from './pages/login';
+import { RegisterPage } from './pages/register';
 
 const router = createBrowserRouter([
     {
@@ -15,24 +15,28 @@ const router = createBrowserRouter([
             {
                 path: 'login',
                 element: (
-                    <LoginForm
-                        heading="Login"
-                        eMail="e-Mail"
-                        password="Password"
-                        submit="Submit"
+                    <LoginPage
+                        form={{
+                            heading: 'Login',
+                            eMail: 'e-Mail',
+                            password: 'Password',
+                            submit: 'Submit',
+                        }}
                     />
                 ),
             },
             {
                 path: 'register',
                 element: (
-                    <RegisterForm
-                        heading="Register"
-                        eMail="e-Mail"
-                        username="Username"
-                        password="Password"
-                        confPassword="Confirm Password"
-                        submit="Submit"
+                    <RegisterPage
+                        form={{
+                            heading: 'Register',
+                            eMail: 'e-Mail',
+                            username: 'Username',
+                            password: 'Password',
+                            confPassword: 'Confirm Password',
+                            submit: 'Submit',
+                        }}
                     />
                 ),
             },

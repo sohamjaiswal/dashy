@@ -2,7 +2,7 @@ import React, { ChangeEvent, FocusEventHandler, MouseEvent } from 'react';
 import { Box } from '../../../box';
 import { ITextInputProps } from './text-input.types';
 
-import './text-input.scss';
+import styles from './text-input.module.scss';
 
 export const TextInput = ({
     required,
@@ -13,8 +13,8 @@ export const TextInput = ({
     type = 'text',
 }: ITextInputProps) => {
     return (
-        <div className="textInput">
-            <Box>
+        <div className={styles['textInput']}>
+            <Box className={styles['textInputBox']}>
                 <input
                     required={required}
                     value={label}

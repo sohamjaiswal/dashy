@@ -1,0 +1,12 @@
+.registerPageBox {
+    top: 50%;
+    right: 50%;
+    width: 40%;
+    transform: translate(75%, 50%);
+    .registerForm {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1rem;
+    }
+}

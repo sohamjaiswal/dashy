@@ -1,3 +1,4 @@
+import { HTMLAttributes } from 'react';
 export interface IRegisterForm {
     heading: string;
     eMail: string;
@@ -5,4 +6,5 @@ export interface IRegisterForm {
     password: string;
     confPassword: string;
     submit: string;
+    className?: string;
 }
