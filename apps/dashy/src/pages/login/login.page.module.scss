@@ -3,7 +3,12 @@
     right: 50%;
     width: 40%;
     transform: translate(75%, 50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
     .loginForm {
+        width: 90%;
         display: flex;
         flex-direction: column;
         gap: 1.25rem;

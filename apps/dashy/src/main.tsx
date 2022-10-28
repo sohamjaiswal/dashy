@@ -22,6 +22,12 @@ const router = createBrowserRouter([
                             password: 'Password',
                             submit: 'Submit',
                         }}
+                        register={{
+                            preText: 'Not signed up? ',
+                            label: 'Register here!',
+                            route: '/register',
+                            postText: '',
+                        }}
                     />
                 ),
             },
@@ -36,6 +42,12 @@ const router = createBrowserRouter([
                             password: 'Password',
                             confPassword: 'Confirm Password',
                             submit: 'Submit',
+                        }}
+                        login={{
+                            preText: 'Already have an account? ',
+                            label: 'Login here!',
+                            route: '/login',
+                            postText: '',
                         }}
                     />
                 ),
