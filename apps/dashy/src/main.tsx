@@ -7,8 +7,13 @@ import { StoreProvider, createStore } from 'easy-peasy';
 import { App } from './app';
 import { LoginPage } from './pages/login';
 import { RegisterPage } from './pages/register';
-import data from './data';
+import { data } from './data';
 import DashboardPage from './pages/dashboard/dashboard.page';
+import axios from 'axios';
+
+axios.defaults.headers.post['Content-Type'] =
+    'application/x-www-form-urlencoded';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 const router = createBrowserRouter([
     {
@@ -57,7 +62,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'dashboard',
-                element: <DashboardPage />,
+                element: <DashboardPage logout="Logout" />,
             },
         ],
     },

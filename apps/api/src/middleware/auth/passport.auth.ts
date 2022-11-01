@@ -4,6 +4,7 @@ import { UsersService } from '../../services/base-model.service';
 import Passport = require('passport');
 import { Schema } from 'mongoose';
 import { ErrorFormatter } from '../../constants/errors';
+import { Logger } from '../../util/logger/logger';
 
 const authErrors = new ErrorFormatter('Passport Auth Error');
 
@@ -13,11 +14,14 @@ export const initPassport = (passport: typeof Passport) => {
         password: string,
         cb: (error: any, user?: any, options?: IVerifyOptions) => void
     ) => {
-        const user = (await UsersService.findOne({ email }).catch((err) =>
-            cb(new Error(err))
-        )) as IUser;
+        Logger.info('YO');
+        const user = (await UsersService.findOne({ email }).catch((err) => {
+            cb(new Error(err));
+        })) as IUser;
+        Logger.info(`User: ${user}`);
         if (!user) return cb(new Error(authErrors.notFound()));
         const compareResult = await user.validateCredentials(password);
+        Logger.info(`shit ${compareResult}`);
         if (compareResult) {
             return cb(null, user);
         } else {

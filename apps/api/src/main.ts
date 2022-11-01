@@ -12,6 +12,7 @@ import { initPassport } from './middleware/auth/passport.auth';
 import passport = require('passport');
 import mongoose from 'mongoose';
 import { expressErrorHandler } from './middleware/handlers/error.handler';
+import { setCorsConfig } from './util/cors.config';
 // import passport = require("passport");
 
 // Connect to DB
@@ -23,12 +24,23 @@ mongoose.connect(MONGO_URI, () => {
 const app = express();
 
 // Initialize middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(
     cors({
-        origin: CORS_ORIGIN,
+        origin: ['http://localhost:4200'],
         credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        allowedHeaders: [
+            'Origin',
+            'X-Requested-With',
+            'Content-Type',
+            'Accept',
+            'token',
+            'Authorization',
+            'X-HTTP-Method-Override',
+        ],
     })
 );
 app.use(
@@ -38,6 +50,7 @@ app.use(
         saveUninitialized: true,
     })
 );
+// app.use(setCorsConfig)
 app.use(cookieParser(SESSION_SECRET));
 initPassport(passport);
 app.use(passport.initialize());
