@@ -9,11 +9,6 @@ import { LoginPage } from './pages/login';
 import { RegisterPage } from './pages/register';
 import { data } from './data';
 import DashboardPage from './pages/dashboard/dashboard.page';
-import axios from 'axios';
-
-axios.defaults.headers.post['Content-Type'] =
-    'application/x-www-form-urlencoded';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 const router = createBrowserRouter([
     {

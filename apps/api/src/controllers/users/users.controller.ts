@@ -5,6 +5,7 @@ import { IUser } from '@dashy/api-interfaces';
 import { UsersService } from '../../services/base-model.service';
 import { sanitizeObject } from '../../util/helpers/sanitize';
 import { isEmptyObj } from '../../util/helpers/check-empty';
+import { Logger } from '../../util/logger/logger';
 
 /**
  * Sign up a user
@@ -29,6 +30,7 @@ export const signupUser = asyncHandler(async (req: Request, res: Response) => {
  * @returns {IUser}
  */
 export const getCurrUser = asyncHandler(async (req: Request, res: Response) => {
+    Logger.info('here');
     res.json(req.user);
 });
 

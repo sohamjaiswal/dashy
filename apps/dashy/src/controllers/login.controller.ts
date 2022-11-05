@@ -21,13 +21,21 @@ export const loginController: (
             success: false,
             message: 'FAILED TO LOGIN',
         };
-    } else if (res as AxiosResponse<Partial<IUser>>) {
+    } else if ((res as AxiosResponse<Partial<IUser>>).status === 200) {
         Toasts.info('🎉 Logged in!');
         return {
             success: true,
             message: 'LOGGED IN SUCCESSFULLY',
         };
+    } else if ((res as AxiosResponse<Partial<IUser>>).status === 400) {
+        Toasts.error('😭 bad request');
+        return {
+            success: false,
+            message: 'LOGGED IN SUCCESSFULLY',
+        };
     }
+    Toasts.error(`😭 Unknown error!`);
+    console.log(res);
     return {
         success: false,
         message: 'UNKOWN ERR',

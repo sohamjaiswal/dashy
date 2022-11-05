@@ -15,7 +15,7 @@ export class UsersService {
             password: password,
         };
         const res = await this.instance
-            .post<IUser>(`${BACKEND_LOC}/users/login`, { data })
+            .post<IUser>(`${BACKEND_LOC}/users/login`, data)
             .catch((err) => {
                 return err.response;
             });

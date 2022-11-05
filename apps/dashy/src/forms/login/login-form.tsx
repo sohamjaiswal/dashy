@@ -26,7 +26,6 @@ export const LoginForm = ({
     const [pass, setPass] = useState('');
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
-        console.log(email, pass);
         const res = await loginController(email, pass);
         if (res.success) {
             setTimeout(() => navigate('/dashboard'), 1500);

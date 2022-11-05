@@ -30,7 +30,9 @@ export const initPassport = (passport: typeof Passport) => {
     };
 
     passport.use(new Strategy({ usernameField: 'email' }, authenticate));
-    passport.serializeUser((user, cb) => cb(null, user._id));
+    passport.serializeUser((user, cb) => {
+        return cb(null, user._id);
+    });
     passport.deserializeUser(async (id: Schema.Types.ObjectId, cb) => {
         const user = await UsersService.findById(id).catch((err) =>
             cb(null, null)
