@@ -12,6 +12,14 @@ export interface IUser {
     validateCredentials: (password: string) => Promise<boolean>;
 }
 
+export interface IGuild {
+    _id: Schema.Types.ObjectId;
+    guildId: string;
+    prefix: string;
+}
+
+export interface IBotGuild extends IGuild {}
+
 export interface IFrontUser extends Omit<IUser, 'validateCredentials'> {}
 
 export interface IError {
