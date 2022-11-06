@@ -1,4 +1,4 @@
-import { IError, IUser } from '@dashy/api-interfaces';
+import { IError, IFrontUser } from '@dashy/api-interfaces';
 import { AxiosResponse } from 'axios';
 import { isError } from '../helpers/error.identifier';
 import { Toasts } from '../helpers/toasts';
@@ -21,13 +21,13 @@ export const loginController: (
             success: false,
             message: 'FAILED TO LOGIN',
         };
-    } else if ((res as AxiosResponse<Partial<IUser>>).status === 200) {
+    } else if ((res as AxiosResponse<IFrontUser>).status === 200) {
         Toasts.info('🎉 Logged in!');
         return {
             success: true,
             message: 'LOGGED IN SUCCESSFULLY',
         };
-    } else if ((res as AxiosResponse<Partial<IUser>>).status === 400) {
+    } else if ((res as AxiosResponse<IFrontUser>).status === 400) {
         Toasts.error('😭 bad request');
         return {
             success: false,

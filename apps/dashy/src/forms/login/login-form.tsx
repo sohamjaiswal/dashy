@@ -4,13 +4,15 @@ import {
     TextInput,
     Typography,
 } from '@dashy/dashy-components';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { ILoginForm } from './login-form.types';
 import { SyntheticEvent } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { loginController } from '../../controllers/login.controller';
+import { mockDelay } from '../../helpers/mock-delay';
+import { useGlobalStoreState, useGlobalStoreActions } from '../../store';
 
 export const LoginForm = ({
     heading,
@@ -18,19 +20,27 @@ export const LoginForm = ({
     password,
     submit,
     className,
+    setLoading,
     ...props
 }: ILoginForm) => {
     const navigate = useNavigate();
+
     const classNames = ['loginForm', className].join(' ');
+
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
+        setLoading(true);
         const res = await loginController(email, pass);
         if (res.success) {
-            setTimeout(() => navigate('/dashboard'), 1500);
+            await mockDelay(() => navigate('/dashboard'), 1500);
+            setLoading(false);
             return;
         }
+        setLoading(false);
+        return;
     };
     return (
         <Form onSubmit={handleSubmit} className={classNames} {...props}>

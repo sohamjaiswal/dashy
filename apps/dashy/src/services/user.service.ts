@@ -1,4 +1,4 @@
-import { IError, IUser } from '@dashy/api-interfaces';
+import { IError, IFrontUser } from '@dashy/api-interfaces';
 import { BACKEND_LOC } from '@dashy/secrets';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
@@ -15,7 +15,7 @@ export class UsersService {
             password: password,
         };
         const res = await this.instance
-            .post<IUser>(`${BACKEND_LOC}/users/login`, data)
+            .post<IFrontUser>(`${BACKEND_LOC}/users/login`, data)
             .catch((err) => {
                 return err.response;
             });
@@ -40,7 +40,7 @@ export class UsersService {
         email: string,
         username: string,
         password: string
-    ) => Promise<AxiosResponse<IUser | IError>> = async (
+    ) => Promise<AxiosResponse<IFrontUser | IError>> = async (
         email: string,
         username: string,
         password: string
@@ -51,7 +51,7 @@ export class UsersService {
             password,
         };
         const res = await this.instance
-            .post<AxiosResponse<Partial<IUser> | IError>>(
+            .post<AxiosResponse<Partial<IFrontUser> | IError>>(
                 `${BACKEND_LOC}/users`,
                 data
             )
@@ -63,7 +63,9 @@ export class UsersService {
 
     getUser = async () => {
         const res = await this.instance
-            .get<AxiosResponse<Partial<IUser> | IError>>(`${BACKEND_LOC}/users`)
+            .get<AxiosResponse<Partial<IFrontUser> | IError>>(
+                `${BACKEND_LOC}/users`
+            )
             .catch((err) => {
                 return err.response;
             });

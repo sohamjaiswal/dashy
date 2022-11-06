@@ -1,4 +1,4 @@
-import { IError, IUser } from '@dashy/api-interfaces';
+import { IError, IFrontUser } from '@dashy/api-interfaces';
 import { AxiosResponse } from 'axios';
 import { isError } from '../helpers/error.identifier';
 import { Toasts } from '../helpers/toasts';
@@ -22,7 +22,7 @@ export const registerController: (
             success: false,
             message: error.message,
         };
-    } else if (res as AxiosResponse<Partial<IUser>>) {
+    } else if (res as AxiosResponse<IFrontUser>) {
         Toasts.info('🎉 Account creation successful');
         return {
             success: true,

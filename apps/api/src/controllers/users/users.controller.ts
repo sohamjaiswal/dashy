@@ -30,7 +30,6 @@ export const signupUser = asyncHandler(async (req: Request, res: Response) => {
  * @returns {IUser}
  */
 export const getCurrUser = asyncHandler(async (req: Request, res: Response) => {
-    Logger.info('here');
     res.json(req.user);
 });
 

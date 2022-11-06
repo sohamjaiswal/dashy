@@ -9,6 +9,8 @@ import { Toasts } from '../../helpers/toasts';
 import { IRegisterForm } from './register-form.types';
 import { useNavigate } from 'react-router-dom';
 import { registerController } from '../../controllers/register.controller';
+import { mockDelay } from '../../helpers/mock-delay';
+import { useGlobalStoreActions } from '../../store';
 
 export const RegisterForm = ({
     heading,
@@ -28,17 +30,30 @@ export const RegisterForm = ({
     const [userName, setUserName] = useState('');
     const [pass, setPass] = useState('');
     const [confPass, setConfPass] = useState('');
+    const [loading, setLoading] = useState(true);
+
+    useGlobalStoreActions((action) => action.setLoading(loading));
 
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
         if (pass === confPass) {
+            setLoading(true);
             const res = await registerController(email, pass, userName);
             if (res.success) {
-                setTimeout(() => navigate('/login'), 1500);
+                mockDelay(() => navigate('/login'), 1500);
+                setLoading(false);
+                return;
             }
         } else {
+            mockDelay(() => {
+                return;
+            }, 1500);
             Toasts.warn('😕 Passwords do not match.');
+            setLoading(false);
+            return;
         }
+        setLoading(false);
+        return;
     };
 
     return (

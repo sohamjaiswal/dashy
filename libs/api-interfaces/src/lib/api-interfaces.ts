@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import { FilterQuery, Schema } from 'mongoose';
 export interface Message {
     message: string;
@@ -10,6 +11,8 @@ export interface IUser {
     password: string;
     validateCredentials: (password: string) => Promise<boolean>;
 }
+
+export interface IFrontUser extends Omit<IUser, 'validateCredentials'> {}
 
 export interface IError {
     error: {

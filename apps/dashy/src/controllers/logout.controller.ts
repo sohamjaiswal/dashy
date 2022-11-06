@@ -14,7 +14,7 @@ export const logoutController = async () => {
             message: 'FAILED TO LOGOUT',
         };
     } else if (isEmptyObj(res.data)) {
-        Toasts.info('🎉 Logged in!');
+        Toasts.info('🎉 Logged out!');
         return {
             success: true,
             message: 'LOGGED OUT SUCCESSFULLY',

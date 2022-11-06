@@ -14,14 +14,12 @@ export const initPassport = (passport: typeof Passport) => {
         password: string,
         cb: (error: any, user?: any, options?: IVerifyOptions) => void
     ) => {
-        Logger.info('YO');
         const user = (await UsersService.findOne({ email }).catch((err) => {
             cb(new Error(err));
         })) as IUser;
         Logger.info(`User: ${user}`);
         if (!user) return cb(new Error(authErrors.notFound()));
         const compareResult = await user.validateCredentials(password);
-        Logger.info(`shit ${compareResult}`);
         if (compareResult) {
             return cb(null, user);
         } else {
