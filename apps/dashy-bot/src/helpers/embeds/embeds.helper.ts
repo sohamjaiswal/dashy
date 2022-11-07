@@ -68,3 +68,5 @@ export class EmbedHelper {
         return successEmbed;
     };
 }
+
+export const embedHelper = new EmbedHelper();

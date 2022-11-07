@@ -1,25 +1,46 @@
 import { Client } from 'guilded.js';
 
-import { BOT_TOKEN as token } from '@dashy/secrets';
+import { BOT_TOKEN as token, DEFAULT_BOT_PREFIX } from '@dashy/secrets';
 
 import { guildInstancer } from './controllers/guilds.controller';
+import { embedHelper } from './helpers/embeds/embeds.helper';
+import { CommandRouter } from './router/command.router';
+import { commands } from './commands';
 
 const client = new Client({ token });
+
+const commandRouter = new CommandRouter(commands);
 
 client.on('ready', () => {
     console.log('Successfully logged in!');
 });
 
 client.on('messageCreated', async (message) => {
-    // pre processors
-    if (message.createdByBotId) return;
+    // pre command processors
+    let prefix = DEFAULT_BOT_PREFIX;
+    // register guild if not registered already
     const guildReg = await guildInstancer(message.serverId);
-
-    //command processors
-    if (message.content === 'ping') {
-        await message.reply('Pong!');
-        return;
+    if (guildReg.success) {
+        const sendEmbed = await embedHelper.successEmbed(client, message);
+        sendEmbed.setTitle(guildReg.title).setDescription(guildReg.description);
+        await message.send(sendEmbed).catch((err) => console.log(err));
     }
+    try {
+        prefix = guildReg.extra.prefix as string;
+    } catch {
+        throw new Error(
+            `Some shit happened with the prefix of server: ${guildReg.extra.guildId}`
+        );
+    }
+    // command processors
+    if (message.content.startsWith(prefix)) {
+        const [command, ...args] = message.content
+            .slice(prefix.length)
+            .split(' ')
+            .filter((word) => word !== '');
+        commandRouter.commandRunner(command, args, client, message);
+    }
+    // post command processors
 });
 
 client.login();

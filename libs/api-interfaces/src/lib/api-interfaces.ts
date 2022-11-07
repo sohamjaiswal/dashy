@@ -16,6 +16,10 @@ export interface IGuild {
     _id: Schema.Types.ObjectId;
     guildId: string;
     prefix: string;
+    helper: {
+        isHelper: boolean;
+        helperChannel: string;
+    };
 }
 
 export interface IBotGuild extends IGuild {}

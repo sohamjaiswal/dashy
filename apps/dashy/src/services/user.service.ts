@@ -3,7 +3,7 @@ import { BACKEND_LOC } from '@dashy/secrets';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 export class UsersService {
-    instance: AxiosInstance;
+    readonly instance: AxiosInstance;
 
     constructor(instance: AxiosInstance) {
         this.instance = instance;

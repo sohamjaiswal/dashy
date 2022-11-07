@@ -6,9 +6,9 @@ import { Logger } from '../util/logger/logger';
 import { AxiosResponse } from 'axios';
 
 class AuthLinkService {
-    clientId: string;
-    clientSecret: string;
-    url: string;
+    readonly clientId: string;
+    readonly clientSecret: string;
+    readonly url: string;
 
     constructor(url: string, clientId: string, clientSecret: string) {
         this.clientId = clientId;
