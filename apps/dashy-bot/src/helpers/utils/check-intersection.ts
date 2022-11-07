@@ -1,5 +1,5 @@
-export const checkIntersection: (sets: Set<any>[]) => boolean = (
-    sets: Set<any>[]
+export const checkIntersection: (sets: Set<unknown>[]) => boolean = (
+    sets: Set<unknown>[]
 ) => {
     sets.forEach((set, i, original) => {
         const setEls = [...set];

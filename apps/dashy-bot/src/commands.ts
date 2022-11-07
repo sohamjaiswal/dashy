@@ -10,5 +10,8 @@ export const commands: Commands = {
     prefix: {
         alias: new Set(['pre']),
         fn: prefixCommand,
+        meta: {
+            perms: 'owner',
+        },
     },
 };

@@ -2,6 +2,7 @@ import { IBotGuild, IError } from '@dashy/api-interfaces';
 import { Client, Message } from 'guilded.js';
 import { embedHelper } from '../helpers/embeds/embeds.helper';
 import { isError } from '../helpers/errors/errors.identifier';
+import { checkOwner } from '../helpers/utils/check-owner';
 import { changeGuildPrefix } from '../services/guilds.service';
 import { CommandFunc } from './command.types';
 export const prefixCommand: CommandFunc = async (
@@ -9,6 +10,14 @@ export const prefixCommand: CommandFunc = async (
     message: Message,
     args: string[]
 ) => {
+    if (!(await checkOwner(message, client))) {
+        const sendEmbed = await embedHelper.errorEmbed(client, message);
+        sendEmbed
+            .setTitle("Couldn't set prefix!")
+            .setDescription('Only owner can run this command currently.');
+        await message.reply(sendEmbed).catch((err) => console.log(err));
+        return;
+    }
     const newPrefix = args[0];
     const res: IBotGuild | IError = await changeGuildPrefix(
         message.serverId,
