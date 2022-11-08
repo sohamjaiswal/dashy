@@ -1,17 +1,13 @@
 import { isError } from '../helpers/errors/errors.identifier';
-import {
-    registerGuild,
-    getGuild,
-    changeGuildPrefix,
-} from '../services/guilds.service';
+import { guildsService } from '../services/guilds.service';
 import { controllerFunc } from './controllers.types';
 
 export const guildInstancer: controllerFunc = async (guildId: string) => {
-    let guildData = await getGuild(guildId);
+    let guildData = await guildsService.getGuild(guildId);
 
     if (isError(guildData)) {
         if (guildData.error.status === 404) {
-            guildData = await registerGuild(guildId);
+            guildData = await guildsService.registerGuild(guildId);
             const res = {
                 success: true,
                 title: 'Guild registered!',
@@ -39,7 +35,10 @@ export const guildInstancer: controllerFunc = async (guildId: string) => {
 
 export const updateGuildPrefix = async (guildId: string, prefix: string) => {
     if (prefix !== '') {
-        const guildData = await changeGuildPrefix(guildId, prefix);
+        const guildData = await guildsService.changeGuildPrefix(
+            guildId,
+            prefix
+        );
         const res = {
             success: true,
             title: 'Prefix set.',

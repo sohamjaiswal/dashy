@@ -21,3 +21,5 @@ export const AUTH_API = {
 };
 
 export const BACKEND_LOC = ''; //Enter the uri of backend
+
+export const DEFAULT_BOT_PREFIX = ''; //Enter default prefix for bot

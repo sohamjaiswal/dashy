@@ -3,7 +3,7 @@ import { Client, Message } from 'guilded.js';
 import { embedHelper } from '../helpers/embeds/embeds.helper';
 import { isError } from '../helpers/errors/errors.identifier';
 import { checkOwner } from '../helpers/utils/check-owner';
-import { changeGuildPrefix } from '../services/guilds.service';
+import { guildsService } from '../services/guilds.service';
 import { CommandFunc } from './command.types';
 export const prefixCommand: CommandFunc = async (
     client: Client,
@@ -19,7 +19,7 @@ export const prefixCommand: CommandFunc = async (
         return;
     }
     const newPrefix = args[0];
-    const res: IBotGuild | IError = await changeGuildPrefix(
+    const res: IBotGuild | IError = await guildsService.changeGuildPrefix(
         message.serverId,
         newPrefix
     );
