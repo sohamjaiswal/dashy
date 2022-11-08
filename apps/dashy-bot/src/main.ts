@@ -6,10 +6,16 @@ import { guildInstancer } from './controllers/guilds.controller';
 import { embedHelper } from './helpers/embeds/embeds.helper';
 import { CommandRouter } from './router/command.router';
 import { commands } from './commands';
+import { MainServerService } from './services/main-server.service';
+import { RestManager, Router } from '@guildedjs/rest';
 
 const client = new Client({ token });
 
 const commandRouter = new CommandRouter(commands);
+
+export const mainServerService = new MainServerService(
+    new Router(new RestManager({ token }))
+);
 
 client.on('ready', () => {
     console.log('Successfully logged in!');

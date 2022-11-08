@@ -2206,11 +2206,25 @@
   resolved "https://registry.yarnpkg.com/@guildedjs/guilded-api-typings/-/guilded-api-typings-2.8.6.tgz#7d3fd59dafd9b319f60bcce943d6c6263eff83e5"
   integrity sha512-DZWuNzH3moBonAS/OvXheFyjJ1MvMibPsmyi4lFTqbPhHl1Fztzg93zsc5Qpe655qSuq2v9Wosn1TCwHcLq7JQ==
 
+"@guildedjs/guilded-api-typings@^2.8.7":
+  version "2.8.7"
+  resolved "https://registry.yarnpkg.com/@guildedjs/guilded-api-typings/-/guilded-api-typings-2.8.7.tgz#a2f1de947781b39dd73f6cbaf9bc4657fcf37a46"
+  integrity sha512-1PIyNyscMoSryJm+kntPLIQzCT+iB3t6NPl2Kme3xzP572uOxuCDbXoKhEEKvNgZIM/Bj9PDnv1OIho5RJUBrg==
+
 "@guildedjs/rest@2.8.7":
   version "2.8.7"
   resolved "https://registry.yarnpkg.com/@guildedjs/rest/-/rest-2.8.7.tgz#993aa520c53bec05e2131a7aa6de8b73de07d35b"
   integrity sha512-mUsQingDz+4pOAh2pbIlsNoz7okTjHPXfxhSfQgtNzwRVTcSkZpuLA0WutWlmLREp37tZIzIeLT57zr7IZLJlA==
   dependencies:
+    node-fetch "2.6.7"
+    qs "^6.10.5"
+
+"@guildedjs/rest@^2.9.1":
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/@guildedjs/rest/-/rest-2.9.1.tgz#664cec4c2f5ec721fd36d3d84d26d58644442da2"
+  integrity sha512-s8tGI7lcstGQbhWhBHXHGWRw3nRNkxkXTUM3W7tpNy3izAVeut4ua2wFsL07JRqxLYcuJEpDkKeqgrufdab8YQ==
+  dependencies:
+    form-data "^4.0.0"
     node-fetch "2.6.7"
     qs "^6.10.5"
 

@@ -2,17 +2,13 @@ import { Router } from 'express';
 import {
     getGuild,
     registerGuild,
-    updateGuildPrefix,
+    updateGuild,
     deleteGuild,
 } from '../../controllers/guilds/guilds.controller';
 
 const router = Router();
 
-router
-    .route('/')
-    .post(registerGuild)
-    .patch(updateGuildPrefix)
-    .delete(deleteGuild);
+router.route('/').post(registerGuild).patch(updateGuild).delete(deleteGuild);
 
 router.route('/:id').get(getGuild);
 

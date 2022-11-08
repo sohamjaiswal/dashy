@@ -22,7 +22,7 @@ export interface IGuild {
     };
 }
 
-export interface IBotGuild extends IGuild {}
+export interface IBotGuild extends Omit<IGuild, '_id'> {}
 
 export interface IFrontUser extends Omit<IUser, 'validateCredentials'> {}
 

@@ -29,21 +29,19 @@ export const registerGuild = asyncHandler(
     }
 );
 
-export const updateGuildPrefix = asyncHandler(
-    async (req: Request, res: Response) => {
-        const { guildId, prefix }: Partial<IGuild> = req.body;
-        if (!(guildId && prefix)) {
-            res.sendStatus(400);
-            throw new Error(errors.badRequest());
-        }
-        const guild = await GuildService.findOne({ guildId });
-        const realGuildId = guild._id;
-        const updatedGuild = await GuildService.updateById(realGuildId, {
-            prefix,
-        });
-        res.status(200).json(updatedGuild);
+export const updateGuild = asyncHandler(async (req: Request, res: Response) => {
+    const { guildId, ...update }: Partial<IGuild> = req.body;
+    if (!(guildId && update)) {
+        res.sendStatus(400);
+        throw new Error(errors.badRequest());
     }
-);
+    const guild = await GuildService.findOne({ guildId });
+    const realGuildId = guild._id;
+    const updatedGuild = await GuildService.updateById(realGuildId, {
+        ...update,
+    });
+    res.status(200).json(updatedGuild);
+});
 
 export const deleteGuild = asyncHandler(async (req: Request, res: Response) => {
     const { guildId }: Partial<IGuild> = req.body;
