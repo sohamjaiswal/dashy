@@ -2,6 +2,7 @@ import { IBotGuild, IError } from '@dashy/api-interfaces';
 import { Client, Message } from 'guilded.js';
 import { embedHelper } from '../helpers/embeds/embeds.helper';
 import { isError } from '../helpers/errors/errors.identifier';
+import { interactionResponseHandler } from '../helpers/handlers/interaction-response.handler';
 import { checkOwner } from '../helpers/utils/check-owner';
 import { guildsService } from '../services/guilds.service';
 import { CommandFunc } from './command.types';
@@ -15,7 +16,9 @@ export const prefixCommand: CommandFunc = async (
         sendEmbed
             .setTitle("Couldn't set prefix!")
             .setDescription('Only owner can run this command currently.');
-        await message.reply(sendEmbed).catch((err) => console.log(err));
+        await interactionResponseHandler(message, sendEmbed).catch((err) => {
+            throw new Error(err);
+        });
         return;
     }
     const newPrefix = args[0];
@@ -28,7 +31,9 @@ export const prefixCommand: CommandFunc = async (
         sendEmbed
             .setTitle("Couldn't set prefix!")
             .setDescription(`${(res as IError).error.message}`);
-        await message.reply(sendEmbed).catch((err) => console.log(err));
+        await interactionResponseHandler(message, sendEmbed).catch((err) => {
+            throw new Error(err);
+        });
         return;
     }
     const sendEmbed = await embedHelper.successEmbed(client, message);
@@ -39,6 +44,8 @@ export const prefixCommand: CommandFunc = async (
                 (res as IBotGuild).guildId
             } \n Prefix changed to: ${(res as IBotGuild).prefix}`
         );
-    await message.reply(sendEmbed).catch((err) => console.log(err));
+    await interactionResponseHandler(message, sendEmbed).catch((err) => {
+        throw new Error(err);
+    });
     return;
 };

@@ -7,6 +7,7 @@ import { IBotGuild, IError } from '@dashy/api-interfaces';
 import { guildsService } from '../services/guilds.service';
 import { isError } from '../helpers/errors/errors.identifier';
 import { embedHelper } from '../helpers/embeds/embeds.helper';
+import { interactionResponseHandler } from '../helpers/handlers/interaction-response.handler';
 
 export const enableHelper: CommandFunc = async (client, message) => {
     const helperChannelData: RESTPostChannelsBody = {
@@ -20,7 +21,7 @@ export const enableHelper: CommandFunc = async (client, message) => {
         sendEmbed
             .setTitle("Couldn't set helper!")
             .setDescription(`Already helper!`);
-        await message.reply(sendEmbed).catch((err) => console.log(err));
+        await interactionResponseHandler(message, sendEmbed);
         return;
     }
     if (currHelper.helperChannel === "''") {
@@ -28,7 +29,7 @@ export const enableHelper: CommandFunc = async (client, message) => {
             await mainServerService.createChannel(helperChannelData)
         ).channel;
         const res: IBotGuild | IError = await guildsService.setHelper(
-            channel.serverId,
+            message.serverId,
             { helper: { isHelper: true, helperChannel: channel.id } }
         );
         if (isError(res)) {
@@ -36,7 +37,11 @@ export const enableHelper: CommandFunc = async (client, message) => {
             sendEmbed
                 .setTitle("Couldn't set helper!")
                 .setDescription(`${(res as IError).error.message}`);
-            await message.reply(sendEmbed).catch((err) => console.log(err));
+            await interactionResponseHandler(message, sendEmbed).catch(
+                (err) => {
+                    throw new Error(err);
+                }
+            );
             return;
         }
         const sendEmbed = await embedHelper.successEmbed(client, message);
@@ -47,7 +52,9 @@ export const enableHelper: CommandFunc = async (client, message) => {
                     (res as IBotGuild).guildId
                 } \n Helper set to: ${(res as IBotGuild).helper.isHelper}`
             );
-        await message.reply(sendEmbed).catch((err) => console.log(err));
+        await interactionResponseHandler(message, sendEmbed).catch((err) => {
+            throw new Error(err);
+        });
         return;
     }
     const res: IBotGuild | IError = await guildsService.setHelper(
@@ -59,7 +66,9 @@ export const enableHelper: CommandFunc = async (client, message) => {
         sendEmbed
             .setTitle("Couldn't set helper!")
             .setDescription(`${(res as IError).error.message}`);
-        await message.reply(sendEmbed).catch((err) => console.log(err));
+        await interactionResponseHandler(message, sendEmbed).catch((err) => {
+            throw new Error(err);
+        });
         return;
     }
     const sendEmbed = await embedHelper.successEmbed(client, message);
@@ -70,7 +79,9 @@ export const enableHelper: CommandFunc = async (client, message) => {
                 (res as IBotGuild).guildId
             } \n Helper set to: ${(res as IBotGuild).helper.isHelper}`
         );
-    await message.reply(sendEmbed).catch((err) => console.log(err));
+    await interactionResponseHandler(message, sendEmbed).catch((err) => {
+        throw new Error(err);
+    });
     return;
 };
 export const disableHelper: CommandFunc = async (client, message) => {
@@ -82,7 +93,9 @@ export const disableHelper: CommandFunc = async (client, message) => {
         sendEmbed
             .setTitle("Couldn't disable helper!")
             .setDescription(`${(guild as IError).error.message}`);
-        await message.reply(sendEmbed).catch((err) => console.log(err));
+        await interactionResponseHandler(message, sendEmbed).catch((err) => {
+            throw new Error(err);
+        });
         return;
     }
     const { helper } = guild;
@@ -91,7 +104,9 @@ export const disableHelper: CommandFunc = async (client, message) => {
         sendEmbed
             .setTitle("Couldn't disable helper!")
             .setDescription(`Helper has not been setup!`);
-        await message.reply(sendEmbed).catch((err) => console.log(err));
+        await interactionResponseHandler(message, sendEmbed).catch((err) => {
+            throw new Error(err);
+        });
         return;
     }
     if (!helper.isHelper) {
@@ -99,13 +114,15 @@ export const disableHelper: CommandFunc = async (client, message) => {
         sendEmbed
             .setTitle("Couldn't set helper!")
             .setDescription(`Already disabled helper!`);
-        await message.reply(sendEmbed).catch((err) => console.log(err));
+        await interactionResponseHandler(message, sendEmbed).catch((err) => {
+            throw new Error(err);
+        });
         return;
     }
     const channel = (await mainServerService.getChannel(helper.helperChannel))
         .channel;
     const res: IBotGuild | IError = await guildsService.setHelper(
-        channel.serverId,
+        message.serverId,
         { helper: { isHelper: false, helperChannel: channel.id } }
     );
     if (isError(res)) {
@@ -113,7 +130,9 @@ export const disableHelper: CommandFunc = async (client, message) => {
         sendEmbed
             .setTitle("Couldn't disable helper!")
             .setDescription(`${(res as IError).error.message}`);
-        await message.reply(sendEmbed).catch((err) => console.log(err));
+        await interactionResponseHandler(message, sendEmbed).catch((err) => {
+            throw new Error(err);
+        });
         return;
     }
     const sendEmbed = await embedHelper.successEmbed(client, message);
@@ -124,6 +143,8 @@ export const disableHelper: CommandFunc = async (client, message) => {
                 (res as IBotGuild).guildId
             } \n Helper set to: ${(res as IBotGuild).helper.isHelper}`
         );
-    await message.reply(sendEmbed).catch((err) => console.log(err));
+    await interactionResponseHandler(message, sendEmbed).catch((err) => {
+        throw new Error(err);
+    });
     return;
 };

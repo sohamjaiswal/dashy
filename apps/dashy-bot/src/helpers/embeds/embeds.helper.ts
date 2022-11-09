@@ -11,6 +11,7 @@ import {
     imgSuccessTick,
 } from '../common/helpers.common';
 import { CommonEmbed } from './embeds.types';
+import { EmbedPayload } from '@guildedjs/guilded-api-typings';
 
 export class EmbedHelper {
     genericEmbed: CommonEmbed = async (client, message) => {
@@ -36,6 +37,31 @@ export class EmbedHelper {
             .setColor(promptColor)
             .setTitle('Embed')
             .setDescription('Generic Embed');
+    };
+
+    convertEmbedToEmbedPayload = (embed: Embed) => {
+        const embedPayload: EmbedPayload = {
+            title: embed?.title,
+            description: embed?.description,
+            // url: embed?.url,
+            timestamp: new Date(embed?.timestamp).toISOString(),
+            color: embed?.color,
+            footer: embed?.footer,
+            image: {
+                url: embed.image?.url,
+            },
+            thumbnail: embed?.thumbnail,
+            author: {
+                name: embed.author.name,
+            },
+            fields: embed?.fields,
+        };
+        return embedPayload;
+    };
+
+    convertEmbedPayloadToEmbed = (embedPayload: EmbedPayload) => {
+        const embed = new Embed(embedPayload);
+        return embed;
     };
 
     errorEmbed: CommonEmbed = async (client, message) => {

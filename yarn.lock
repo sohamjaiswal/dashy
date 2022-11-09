@@ -2172,9 +2172,9 @@
     lodash.once "^4.1.1"
 
 "@discordjs/collection@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-1.1.0.tgz#5f9f926404fd48ccde86a0d2268f202cbec77833"
-  integrity sha512-PQ2Bv6pnT7aGPCKWbvvNRww5tYCGpggIQVgpuF9TdDPeR6n6vQYxezXiLVOS9z2B62Dp4c+qepQ15SgJbLYtCQ==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-1.2.0.tgz#5cad4bb47521c6f0abd175bf55c84528d1ac94f7"
+  integrity sha512-VvrrtGb7vbfPHzbhGq9qZB5o8FOB+kfazrxdt0OtxzSkoBuw9dURMkCwWizZ00+rDpiK2HmLHBZX+y6JsG9khw==
 
 "@discoveryjs/json-ext@^0.5.3":
   version "0.5.7"
@@ -2201,25 +2201,12 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@guildedjs/guilded-api-typings@2.8.6":
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/@guildedjs/guilded-api-typings/-/guilded-api-typings-2.8.6.tgz#7d3fd59dafd9b319f60bcce943d6c6263eff83e5"
-  integrity sha512-DZWuNzH3moBonAS/OvXheFyjJ1MvMibPsmyi4lFTqbPhHl1Fztzg93zsc5Qpe655qSuq2v9Wosn1TCwHcLq7JQ==
-
-"@guildedjs/guilded-api-typings@^2.8.7":
+"@guildedjs/guilded-api-typings@2.8.7", "@guildedjs/guilded-api-typings@^2.8.7":
   version "2.8.7"
   resolved "https://registry.yarnpkg.com/@guildedjs/guilded-api-typings/-/guilded-api-typings-2.8.7.tgz#a2f1de947781b39dd73f6cbaf9bc4657fcf37a46"
   integrity sha512-1PIyNyscMoSryJm+kntPLIQzCT+iB3t6NPl2Kme3xzP572uOxuCDbXoKhEEKvNgZIM/Bj9PDnv1OIho5RJUBrg==
 
-"@guildedjs/rest@2.8.7":
-  version "2.8.7"
-  resolved "https://registry.yarnpkg.com/@guildedjs/rest/-/rest-2.8.7.tgz#993aa520c53bec05e2131a7aa6de8b73de07d35b"
-  integrity sha512-mUsQingDz+4pOAh2pbIlsNoz7okTjHPXfxhSfQgtNzwRVTcSkZpuLA0WutWlmLREp37tZIzIeLT57zr7IZLJlA==
-  dependencies:
-    node-fetch "2.6.7"
-    qs "^6.10.5"
-
-"@guildedjs/rest@^2.9.1":
+"@guildedjs/rest@2.9.1", "@guildedjs/rest@^2.9.1":
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/@guildedjs/rest/-/rest-2.9.1.tgz#664cec4c2f5ec721fd36d3d84d26d58644442da2"
   integrity sha512-s8tGI7lcstGQbhWhBHXHGWRw3nRNkxkXTUM3W7tpNy3izAVeut4ua2wFsL07JRqxLYcuJEpDkKeqgrufdab8YQ==
@@ -2228,19 +2215,20 @@
     node-fetch "2.6.7"
     qs "^6.10.5"
 
-"@guildedjs/webhook-client@0.3.13":
-  version "0.3.13"
-  resolved "https://registry.yarnpkg.com/@guildedjs/webhook-client/-/webhook-client-0.3.13.tgz#0747b36303702efeb7f5ca6bf10a517d746d3d41"
-  integrity sha512-Ajy/enriTWyBw5S3Ppcj7H2lazSrz01lNdBAw+U2R4Sjt+orpqnRddTpTp4E81HouyRmyWCMPyeQ5XP6ayb2ew==
+"@guildedjs/webhook-client@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@guildedjs/webhook-client/-/webhook-client-0.4.2.tgz#f450eaa7b0635ee234042ded63705d3a2b56fe5d"
+  integrity sha512-hI8O2zo55vwee+/UKC3fMWdLSj7ow1tjN7cIe+piiGaNa4ry2WnSJlAk6RoXCMe/milTc5tk54CVL8F+aSSqBg==
   dependencies:
-    "@guildedjs/rest" "2.8.7"
+    "@guildedjs/rest" "2.9.1"
+    form-data "^4.0.0"
 
-"@guildedjs/ws@1.4.10":
-  version "1.4.10"
-  resolved "https://registry.yarnpkg.com/@guildedjs/ws/-/ws-1.4.10.tgz#69e1f96d1d0ff1f772bf0e77538ccdb0b1834c63"
-  integrity sha512-pH5TSj4xw5XmepjZU8VqqZN06a1gOIVHbvhUrkV5PzLw/bh5JmZzahW3KSPdifhCkrZj4m01D9KSs9e4zd7E8g==
+"@guildedjs/ws@1.4.11":
+  version "1.4.11"
+  resolved "https://registry.yarnpkg.com/@guildedjs/ws/-/ws-1.4.11.tgz#b47d8e152913d283a9f8a0fccedfd671d7cff76e"
+  integrity sha512-F1N5EnPPuHOjIbbZwtJBuYDd9d9ZfDiC7NQOWFaQEZiH5gd8sbYHsotv9iPvszqWqhXinD3EWHPynnJQMr2VBw==
   dependencies:
-    "@guildedjs/guilded-api-typings" "2.8.6"
+    "@guildedjs/guilded-api-typings" "2.8.7"
     "@types/ws" "8.5.3"
     typed-emitter "2.1.0"
     ws "8.9.0"
@@ -4668,9 +4656,9 @@
     form-data "^3.0.0"
 
 "@types/node@*":
-  version "18.7.23"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.23.tgz#75c580983846181ebe5f4abc40fe9dfb2d65665f"
-  integrity sha512-DWNcCHolDq0ZKGizjx2DZjR/PqsYwAcYUJmfMWqtVU2MBMG5Mo+xFZrhGId5r/O5HOuMPyQEcM6KUBp5lBZZBg==
+  version "18.11.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
+  integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==
 
 "@types/node@16.11.7":
   version "16.11.7"
@@ -9784,14 +9772,14 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
 guilded.js@^0.13.16:
-  version "0.13.16"
-  resolved "https://registry.yarnpkg.com/guilded.js/-/guilded.js-0.13.16.tgz#d64f3f686f25b7a06085e8d74f49f620ad480d49"
-  integrity sha512-TZEpK1502AMbCLXHX7y3fZJoki9Sr2zBxrnl0xeSIeRrtczN2Ytbm8sFgAx5JFrzF038XpftI7xjsVeXzLQbpQ==
+  version "0.13.21"
+  resolved "https://registry.yarnpkg.com/guilded.js/-/guilded.js-0.13.21.tgz#db8514f6cbc56ebf2b4bb9a9bbc4570c72ce61c3"
+  integrity sha512-kjApn4z6pojyYxRh73nciz0yK7FcvN8bsY69Ij3H7fp4soPWJVZpDNtyb6w3pqjnlCcOmovYH0NlJKcoh21Bvw==
   dependencies:
     "@discordjs/collection" "^1.1.0"
-    "@guildedjs/rest" "2.8.7"
-    "@guildedjs/webhook-client" "0.3.13"
-    "@guildedjs/ws" "1.4.10"
+    "@guildedjs/rest" "2.9.1"
+    "@guildedjs/webhook-client" "0.4.2"
+    "@guildedjs/ws" "1.4.11"
     typed-emitter "2.1.0"
 
 handle-thing@^2.0.0:
@@ -16544,10 +16532,15 @@ tslib@^1.10.0, tslib@^1.11.1, tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2, tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1, tslib@^2.4.0:
+tslib@^2, tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.3.0, tslib@^2.3.1, tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
+
+tslib@^2.1.0:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
+  integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
 
 tsutils@^3.21.0:
   version "3.21.0"
