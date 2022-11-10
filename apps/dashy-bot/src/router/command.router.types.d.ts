@@ -5,6 +5,7 @@ export type Perms = 'open' | 'protected' | 'owner';
 
 export interface ICommandMeta {
     perms?: Perms;
+    help?: string;
 }
 
 export interface ICommand {

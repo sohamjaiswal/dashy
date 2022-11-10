@@ -44,7 +44,11 @@ client.on('messageCreated', async (message) => {
             .slice(prefix.length)
             .split(' ')
             .filter((word) => word !== '');
-        commandRouter.commandRunner(command, args, client, message);
+        commandRouter
+            .commandRunner(command, args, client, message)
+            .catch((err) => {
+                throw new Error(err);
+            });
     }
     // post command processors
 });
