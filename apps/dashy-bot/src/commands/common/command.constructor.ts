@@ -28,7 +28,17 @@ export class CommandInteractionConstructor {
         if (res.status === 400) {
             const sendEmbed = (await embedHelper.promptEmbed(client, message))
                 .setTitle(`Error: ${this.commandName}`)
-                .addField('Reason:', `User Error: ${res.data}`, true);
+                .addField('Reason:', `User Error: ${res.data}`);
+            interactionResponseHandler(message, sendEmbed);
+            return;
+        }
+        if (res.status === 300) {
+            const sendEmbed = (await embedHelper.errorEmbed(client, message))
+                .setTitle(
+                    `Uncontrollable guild-side error occured while running ${this.commandName}`
+                )
+                .addField('Reason:', `${res.data}`, true)
+                .addField('To fix:', 'Follow up on reason.', true);
             interactionResponseHandler(message, sendEmbed);
             return;
         }
@@ -38,6 +48,17 @@ export class CommandInteractionConstructor {
                 .setDescription(`${res.data}`);
             interactionResponseHandler(message, sendEmbed);
         }
-        console.log('command not using res code, data, use proper res.');
+        if (res.status === 9000) {
+            const sendEmbed = (await embedHelper.successEmbed(client, message))
+                .setTitle(`Oof: ${this.commandName}`)
+                .setDescription(
+                    `You have encountered a special type of error, approach a developer to help.`
+                )
+                .addField('error', `${res.data}`);
+            interactionResponseHandler(message, sendEmbed);
+        }
+        console.log(
+            `command not using ${this.commandName} res code, data, use proper res.`
+        );
     };
 }

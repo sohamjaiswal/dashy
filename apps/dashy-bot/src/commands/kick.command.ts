@@ -1,8 +1,8 @@
 import { CommandInteractionConstructor } from './common/command.constructor';
 import { checkOwner } from '../helpers/utils/check-owner';
 import { guildedRestService } from '../main';
-export const legacyBanCommand = new CommandInteractionConstructor(
-    'legacyban',
+export const legacyKickCommand = new CommandInteractionConstructor(
+    'legacykick',
     async (client, message, args) => {
         if (!(await checkOwner(message, client))) {
             return {
@@ -14,13 +14,13 @@ export const legacyBanCommand = new CommandInteractionConstructor(
             console.log('arg not found');
             return {
                 status: 400,
-                data: 'You must pass ID of user to ban.',
+                data: 'You must pass ID of user to kicked.',
             };
         }
         return guildedRestService
             .banMember(message.serverId, args[0])
             .then(() => {
-                return { status: 200, data: `Successfully banned: ${args[0]}` };
+                return { status: 200, data: `Successfully kicked: ${args[0]}` };
             })
             .catch((err) => {
                 if (err.code === 400) {

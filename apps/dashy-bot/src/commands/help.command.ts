@@ -26,13 +26,26 @@ export class HelpCommand {
         for (const command in commands) {
             const helpObj: IHelpObj = {
                 commandName: command,
-                aliases: new String().concat(
-                    ...Array.from(commands[command]['alias']).map(
-                        (alias) => `"${alias}" `
-                    )
+                aliases: commands[command]['alias']
+                    ? new String().concat(
+                          ...Array.from(commands[command]['alias']).map(
+                              (alias) => `"${alias}" `
+                          )
+                      )
+                    : '**None**',
+                help: commands[command]['meta']['help']
+                    ? commands[command]['meta']['help']
+                    : '**Not Available**',
+                reqPerms: commands[command]['meta']['perms']
+                    ? commands[command]['meta']['perms']
+                    : '**Not Available**',
+                usage: `**${command}**`.concat(
+                    commands[command]['meta']['args']
+                        ? commands[command]['meta']['args']
+                              .map((arg) => ` <${arg}>`)
+                              .join(' ')
+                        : ' **(no args)**'
                 ),
-                help: this.commands[command]['meta']['help'],
-                reqPerms: this.commands[command]['meta']['perms'],
             };
             commandHelpList.push(helpObj);
         }
@@ -56,7 +69,7 @@ export class HelpCommand {
             page.forEach((line) => {
                 sendEmbed.addField(
                     `${serverPre}${line.commandName}`,
-                    `Alias: ${line.aliases}\nDesc: ${line.help}\nPerms: ${line.reqPerms}`,
+                    `Alias: ${line.aliases}\nDesc: ${line.help}\nPerms: ${line.reqPerms}\nUsage: ${line.usage}`,
                     true
                 );
             });
