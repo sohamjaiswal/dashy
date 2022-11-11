@@ -59,7 +59,8 @@ export class HelpCommand {
             page.forEach((line) => {
                 sendEmbed.addField(
                     `${line.commandName}`,
-                    `Alias: ${line.aliases}\nDesc: ${line.help}\nPerms: ${line.reqPerms}`
+                    `Alias: ${line.aliases}\nDesc: ${line.help}\nPerms: ${line.reqPerms}`,
+                    true
                 );
             });
             message.reply(sendEmbed);
