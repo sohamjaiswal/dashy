@@ -1,5 +1,5 @@
 import { guildsService } from '../../services/guilds.service';
-import { mainServerService } from '../../main';
+import { guildedRestService } from '../../main';
 import { Embed, Message } from 'guilded.js';
 import { embedHelper } from '../embeds/embeds.helper';
 import { IBotGuild } from '@dashy/api-interfaces';
@@ -12,22 +12,21 @@ export const interactionResponseHandler = async (
         .getGuild(message.serverId)
         .catch((err) => console.log(err))) as IBotGuild;
     await message.reply(content).catch((err) => console.log(err));
-    console.log(guild);
     if (guild.helper.isHelper) {
         const channel = (
-            (await mainServerService
+            (await guildedRestService
                 .getChannel(guild.helper.helperChannel)
                 .catch((err) => console.log(err))) as RESTPostChannelsResult
         ).channel;
         if (content instanceof Embed) {
-            mainServerService
+            guildedRestService
                 .sendMessageToChannel(channel.id, {
                     embeds: [embedHelper.convertEmbedToEmbedPayload(content)],
                 })
                 .catch((err) => console.log(err));
             return;
         }
-        mainServerService
+        guildedRestService
             .sendMessageToChannel(channel.id, { content })
             .catch((err) => console.log(err));
     }

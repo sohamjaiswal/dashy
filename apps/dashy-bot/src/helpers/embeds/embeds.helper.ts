@@ -48,11 +48,13 @@ export class EmbedHelper {
             color: embed?.color,
             footer: embed?.footer,
             image: {
-                url: embed.image?.url,
+                url: embed?.image?.url,
             },
-            thumbnail: embed?.thumbnail,
+            thumbnail: {
+                url: embed?.thumbnail?.url,
+            },
             author: {
-                name: embed.author.name,
+                name: embed?.author?.name,
             },
             fields: embed?.fields,
         };

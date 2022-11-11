@@ -2,8 +2,8 @@ import { pingCommand } from './commands/ping.command';
 import { prefixCommand } from './commands/prefix.command';
 import { Commands } from './router/command.router.types';
 import { disableHelper, enableHelper } from './commands/helper.command';
-import { helpCommand } from './main';
 import { giveHelpCommand } from './commands/help.command';
+import { legacyBanCommand } from './commands/ban.command';
 
 export const commands: Commands = {
     ping: {
@@ -44,6 +44,14 @@ export const commands: Commands = {
         meta: {
             perms: 'open',
             help: 'Gives help.',
+        },
+    },
+    lbanish: {
+        alias: new Set(['lban', 'lOust', 'lEvict']),
+        fn: legacyBanCommand.runCommand,
+        meta: {
+            perms: 'owner',
+            help: 'Performs a native ban on the mentioned userId',
         },
     },
 };

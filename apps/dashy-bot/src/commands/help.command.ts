@@ -5,6 +5,7 @@ import { guildsService } from '../services/guilds.service';
 import { paginator } from '../helpers/utils/paginator';
 import { IBotGuild } from '@dashy/api-interfaces';
 import { helpCommand } from '../main';
+import { interactionResponseHandler } from '../helpers/handlers/interaction-response.handler';
 
 export class HelpCommand {
     readonly commands: Commands;
@@ -16,16 +17,13 @@ export class HelpCommand {
     }[];
 
     constructor(commands: Commands) {
-        console.log(commands);
         this.commands = commands;
         this.helpObjs = this.commandsToHelpObjs(this.commands);
     }
 
     private commandsToHelpObjs: CommandsToHelpObj = (commands) => {
         const commandHelpList: IHelpObj[] = [];
-        console.log('here');
         for (const command in commands) {
-            console.log(command);
             const helpObj: IHelpObj = {
                 commandName: command,
                 aliases: new String().concat(
@@ -36,7 +34,6 @@ export class HelpCommand {
                 help: this.commands[command]['meta']['help'],
                 reqPerms: this.commands[command]['meta']['perms'],
             };
-            console.log(helpObj);
             commandHelpList.push(helpObj);
         }
         return commandHelpList;
@@ -50,7 +47,7 @@ export class HelpCommand {
         if (parseInt(args[0])) {
             const page: IHelpObj[] = paginator(
                 this.helpObjs,
-                10,
+                5,
                 parseInt(args[0])
             );
             const sendEmbed = (await embedHelper.genericEmbed(client, message))
@@ -58,12 +55,12 @@ export class HelpCommand {
                 .setDescription(`Help for page: ${args[0]}`);
             page.forEach((line) => {
                 sendEmbed.addField(
-                    `${line.commandName}`,
+                    `${serverPre}${line.commandName}`,
                     `Alias: ${line.aliases}\nDesc: ${line.help}\nPerms: ${line.reqPerms}`,
                     true
                 );
             });
-            message.reply(sendEmbed);
+            interactionResponseHandler(message, sendEmbed);
             return;
         }
         const sendEmbed = (await embedHelper.errorEmbed(client, message))
@@ -71,7 +68,7 @@ export class HelpCommand {
             .setDescription(
                 `Usage: ${serverPre}help 1 \n Format: ${serverPre}help <PageNumber>`
             );
-        message.reply(sendEmbed);
+        interactionResponseHandler(message, sendEmbed);
         return;
     };
 }

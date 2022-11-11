@@ -5,7 +5,7 @@ import {
 
 import { Router } from '@guildedjs/rest';
 
-export class MainServerService {
+export class GuildedRestService {
     readonly router: Router;
 
     constructor(router: Router) {
@@ -25,5 +25,9 @@ export class MainServerService {
         content: RESTPostChannelMessagesBody
     ) => {
         return this.router.createChannelMessage(channelId, content);
+    };
+
+    banMember = (serverId: string, userId: string) => {
+        return this.router.banMember(serverId, userId);
     };
 }

@@ -2,7 +2,7 @@ import { CommandFunc } from './command.types';
 
 import { HELPER_COMMAND_DATA } from '@dashy/secrets';
 import { RESTPostChannelsBody } from '@guildedjs/guilded-api-typings';
-import { mainServerService } from '../main';
+import { guildedRestService } from '../main';
 import { IBotGuild, IError } from '@dashy/api-interfaces';
 import { guildsService } from '../services/guilds.service';
 import { isError } from '../helpers/errors/errors.identifier';
@@ -26,7 +26,7 @@ export const enableHelper: CommandFunc = async (client, message) => {
     }
     if (currHelper.helperChannel === "''") {
         const channel = (
-            await mainServerService.createChannel(helperChannelData)
+            await guildedRestService.createChannel(helperChannelData)
         ).channel;
         const res: IBotGuild | IError = await guildsService.setHelper(
             message.serverId,
@@ -119,7 +119,7 @@ export const disableHelper: CommandFunc = async (client, message) => {
         });
         return;
     }
-    const channel = (await mainServerService.getChannel(helper.helperChannel))
+    const channel = (await guildedRestService.getChannel(helper.helperChannel))
         .channel;
     const res: IBotGuild | IError = await guildsService.setHelper(
         message.serverId,
