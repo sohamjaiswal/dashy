@@ -8,9 +8,11 @@ import { CommandRouter } from './router/command.router';
 import { commands } from './commands';
 import { MainServerService } from './services/main-server.service';
 import { RestManager, Router } from '@guildedjs/rest';
+import { HelpCommand } from './commands/help.command';
 
 const client = new Client({ token });
 
+export const helpCommand = new HelpCommand(commands);
 const commandRouter = new CommandRouter(commands);
 
 export const mainServerService = new MainServerService(

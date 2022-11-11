@@ -1,14 +1,14 @@
-import { commands } from '../commands';
 import { Commands } from '../router/command.router.types';
-import { CommandFunc } from './command.types';
+import { CommandFunc, CommandsToHelpObj, IHelpObj } from './command.types';
 import { embedHelper } from '../helpers/embeds/embeds.helper';
 import { guildsService } from '../services/guilds.service';
 import { paginator } from '../helpers/utils/paginator';
 import { IBotGuild } from '@dashy/api-interfaces';
+import { helpCommand } from '../main';
 
 export class HelpCommand {
     readonly commands: Commands;
-    readonly helpsObj: {
+    readonly helpObjs: {
         commandName: string;
         aliases: string;
         help: string;
@@ -16,23 +16,20 @@ export class HelpCommand {
     }[];
 
     constructor(commands: Commands) {
+        console.log(commands);
         this.commands = commands;
-        this.helpsObj = this.commandsToHelpObj();
+        this.helpObjs = this.commandsToHelpObjs(this.commands);
     }
 
-    private commandsToHelpObj: () => {
-        commandName: string;
-        aliases: string;
-        help: string;
-        reqPerms: string;
-    }[] = () => {
-        const commandHelpList = [];
+    private commandsToHelpObjs: CommandsToHelpObj = (commands) => {
+        const commandHelpList: IHelpObj[] = [];
         console.log('here');
-        for (const command in this.commands) {
-            const helpObj = {
+        for (const command in commands) {
+            console.log(command);
+            const helpObj: IHelpObj = {
                 commandName: command,
                 aliases: new String().concat(
-                    ...Array.from(this.commands[command]['alias']).map(
+                    ...Array.from(commands[command]['alias']).map(
                         (alias) => `"${alias}" `
                     )
                 ),
@@ -44,19 +41,18 @@ export class HelpCommand {
         }
         return commandHelpList;
     };
-    sendHelp: CommandFunc = async (client, message, args) => {
+    public sendHelp: CommandFunc = async (client, message, args) => {
         const serverPre = (
             (await guildsService.getGuild(message.serverId).catch((err) => {
                 throw new Error(err);
             })) as IBotGuild
         ).prefix;
         if (parseInt(args[0])) {
-            const page: {
-                commandName: string;
-                aliases: string;
-                help: string;
-                reqPerms: string;
-            }[] = paginator(this.helpsObj, 10, parseInt(args[0]));
+            const page: IHelpObj[] = paginator(
+                this.helpObjs,
+                10,
+                parseInt(args[0])
+            );
             const sendEmbed = (await embedHelper.genericEmbed(client, message))
                 .setTitle(`Help!`)
                 .setDescription(`Help for page: ${args[0]}`);
@@ -79,4 +75,7 @@ export class HelpCommand {
     };
 }
 
-export const helpCommand = new HelpCommand(commands);
+export const giveHelpCommand: CommandFunc = (client, message, args) => {
+    helpCommand.sendHelp(client, message, args);
+    return;
+};

@@ -2,17 +2,10 @@ import { pingCommand } from './commands/ping.command';
 import { prefixCommand } from './commands/prefix.command';
 import { Commands } from './router/command.router.types';
 import { disableHelper, enableHelper } from './commands/helper.command';
-import { helpCommand } from './commands/help.command';
+import { helpCommand } from './main';
+import { giveHelpCommand } from './commands/help.command';
 
 export const commands: Commands = {
-    help: {
-        alias: new Set(['h']),
-        fn: helpCommand.sendHelp,
-        meta: {
-            perms: 'open',
-            help: 'Gives help.',
-        },
-    },
     ping: {
         alias: new Set(['p', 'pong']),
         fn: pingCommand,
@@ -43,6 +36,14 @@ export const commands: Commands = {
         meta: {
             perms: 'owner',
             help: 'Disables interaction logging in official server.',
+        },
+    },
+    help: {
+        alias: new Set(['h']),
+        fn: giveHelpCommand,
+        meta: {
+            perms: 'open',
+            help: 'Gives help.',
         },
     },
 };
