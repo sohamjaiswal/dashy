@@ -6,12 +6,23 @@ import { IBotGuild } from '@dashy/api-interfaces';
 import { RESTPostChannelsResult } from '@guildedjs/guilded-api-typings';
 export const interactionResponseHandler = async (
     message: Message,
-    content: Embed | string
+    content: Embed | string,
+    isPrivate?: boolean
 ) => {
     const guild = (await guildsService
         .getGuild(message.serverId)
         .catch((err) => console.log(err))) as IBotGuild;
-    await message.reply(content).catch((err) => console.log(err));
+    const resChannel = message.channelId;
+    const resMessageId = message.id;
+    if (content instanceof Embed) {
+        await guildedRestService
+            .sendMessageToChannel(resChannel, {
+                embeds: [embedHelper.convertEmbedToEmbedPayload(content)],
+                isPrivate: isPrivate,
+                replyMessageIds: [resMessageId],
+            })
+            .catch((err) => console.log(err));
+    }
     if (guild.helper.isHelper) {
         const channel = (
             (await guildedRestService

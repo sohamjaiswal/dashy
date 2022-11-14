@@ -16,49 +16,44 @@ export class CommandInteractionConstructor {
 
     runCommand: CommandFunc = async (client, message, args) => {
         const res = (await this.runFunc(client, message, args)) as ICommandRes;
-        console;
+        let sendEmbed = (await embedHelper.errorEmbed(client, message))
+            .setTitle('Our bad...')
+            .setDescription(
+                'If you are seeing this, the developer of the bot has f*cked up, please tell them about this.'
+            );
         if (res.status === 500) {
-            const sendEmbed = (await embedHelper.errorEmbed(client, message))
+            sendEmbed = (await embedHelper.errorEmbed(client, message))
                 .setTitle("Yikes... something's bad on our end...")
                 .addField('Reason:', `Bot Error: ${res.data}`, true)
                 .addField('To fix:', 'Please contact Dashy staff.', true);
-            interactionResponseHandler(message, sendEmbed);
-            return;
         }
         if (res.status === 400) {
-            const sendEmbed = (await embedHelper.promptEmbed(client, message))
+            sendEmbed = (await embedHelper.promptEmbed(client, message))
                 .setTitle(`Error: ${this.commandName}`)
                 .addField('Reason:', `User Error: ${res.data}`);
-            interactionResponseHandler(message, sendEmbed);
-            return;
         }
         if (res.status === 300) {
-            const sendEmbed = (await embedHelper.errorEmbed(client, message))
+            sendEmbed = (await embedHelper.errorEmbed(client, message))
                 .setTitle(
                     `Uncontrollable guild-side error occured while running ${this.commandName}`
                 )
                 .addField('Reason:', `${res.data}`, true)
                 .addField('To fix:', 'Follow up on reason.', true);
-            interactionResponseHandler(message, sendEmbed);
-            return;
         }
         if (res.status === 200) {
-            const sendEmbed = (await embedHelper.successEmbed(client, message))
+            sendEmbed = (await embedHelper.successEmbed(client, message))
                 .setTitle(`Success: ${this.commandName}`)
                 .setDescription(`${res.data}`);
-            interactionResponseHandler(message, sendEmbed);
         }
         if (res.status === 9000) {
-            const sendEmbed = (await embedHelper.successEmbed(client, message))
+            sendEmbed = (await embedHelper.successEmbed(client, message))
                 .setTitle(`Oof: ${this.commandName}`)
                 .setDescription(
                     `You have encountered a special type of error, approach a developer to help.`
                 )
                 .addField('error', `${res.data}`);
-            interactionResponseHandler(message, sendEmbed);
         }
-        console.log(
-            `command not using ${this.commandName} res code, data, use proper res.`
-        );
+        interactionResponseHandler(message, sendEmbed);
+        return;
     };
 }

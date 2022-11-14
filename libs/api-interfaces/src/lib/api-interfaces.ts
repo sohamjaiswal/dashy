@@ -9,6 +9,7 @@ export interface IUser {
     email: string;
     username: string;
     password: string;
+    guildedId?: string;
     validateCredentials: (password: string) => Promise<boolean>;
 }
 
@@ -20,6 +21,11 @@ export interface IGuild {
         isHelper: boolean;
         helperChannel: string;
     };
+}
+
+export interface ILink {
+    dashyId: Schema.Types.ObjectId;
+    guildedId: string;
 }
 
 export interface IBotGuild extends Omit<IGuild, '_id'> {}

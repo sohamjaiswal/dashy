@@ -3,6 +3,7 @@ import passport = require('passport');
 import {
     deleteUser,
     getCurrUser,
+    getLinkId,
     logoutUser,
     signupUser,
     updateUser,
@@ -22,5 +23,7 @@ router
 router.route('/login').post(passport.authenticate('local'), getCurrUser);
 
 router.route('/logout').post(isAuthenticated, logoutUser);
+
+router.route('/getlinkid').post(isAuthenticated, getLinkId);
 
 export default router;

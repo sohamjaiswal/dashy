@@ -4,7 +4,7 @@ import { embedHelper } from '../helpers/embeds/embeds.helper';
 import { guildsService } from '../services/guilds.service';
 import { paginator } from '../helpers/utils/paginator';
 import { IBotGuild } from '@dashy/api-interfaces';
-import { helpCommand } from '../main';
+import { helpCommand, guildedRestService } from '../main';
 import { interactionResponseHandler } from '../helpers/handlers/interaction-response.handler';
 
 export class HelpCommand {
@@ -52,6 +52,7 @@ export class HelpCommand {
         return commandHelpList;
     };
     public sendHelp: CommandFunc = async (client, message, args) => {
+        guildedRestService.deleteMessage(message);
         const serverPre = (
             (await guildsService.getGuild(message.serverId).catch((err) => {
                 throw new Error(err);
@@ -73,7 +74,7 @@ export class HelpCommand {
                     true
                 );
             });
-            interactionResponseHandler(message, sendEmbed);
+            interactionResponseHandler(message, sendEmbed, true);
             return;
         }
         const sendEmbed = (await embedHelper.errorEmbed(client, message))
@@ -81,7 +82,7 @@ export class HelpCommand {
             .setDescription(
                 `Usage: ${serverPre}help 1 \n Format: ${serverPre}help <PageNumber>`
             );
-        interactionResponseHandler(message, sendEmbed);
+        interactionResponseHandler(message, sendEmbed, true);
         return;
     };
 }

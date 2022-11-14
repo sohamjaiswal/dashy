@@ -21,6 +21,13 @@ const UserSchema = new Schema({
         required: [true, 'Enter a username.'],
         unique: [true, 'That username is already in use.'],
     },
+    guildedId: {
+        type: String,
+        unique: [
+            true,
+            'That Guilded account seems to be linked to some other account already.',
+        ],
+    },
 });
 
 UserSchema.methods.validateCredentials = async function (password: string) {

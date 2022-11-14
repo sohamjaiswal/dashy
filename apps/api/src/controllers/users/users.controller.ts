@@ -104,3 +104,7 @@ export const logoutUser = asyncHandler(async (req: Request, res: Response) => {
     });
     res.json({});
 });
+
+export const getLinkId = asyncHandler(async (req: Request, res: Response) => {
+    res.json(req.user._id);
+});

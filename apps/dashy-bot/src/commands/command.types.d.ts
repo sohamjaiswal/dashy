@@ -3,16 +3,17 @@ import { Commands } from '../router/command.router.types';
 
 export type statusResponse = 200 | 300 | 400 | 500 | 9000;
 
-export interface ICommandRes {
+export type ICommandRes = {
     status: statusResponse;
     data: string;
-}
+    private?: boolean;
+};
 
 export type CommandFunc = (
     client: Client,
     message: Message,
     args?: string[]
-) => void | Promise<void> | CommandRes;
+) => void | Promise<void> | ICommandRes | Promise<ICommandRes>;
 
 export interface IHelpObj {
     commandName: string;

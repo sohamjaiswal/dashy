@@ -1,6 +1,7 @@
 import { CommandInteractionConstructor } from './common/command.constructor';
 import { checkOwner } from '../helpers/utils/check-owner';
 import { guildedRestService } from '../main';
+import { statusResponse } from './command.types';
 export const legacyKickCommand = new CommandInteractionConstructor(
     'legacykick',
     async (client, message, args) => {
@@ -20,7 +21,10 @@ export const legacyKickCommand = new CommandInteractionConstructor(
         return guildedRestService
             .banMember(message.serverId, args[0])
             .then(() => {
-                return { status: 200, data: `Successfully kicked: ${args[0]}` };
+                return {
+                    status: 200 as statusResponse,
+                    data: `Successfully kicked: ${args[0]}`,
+                };
             })
             .catch((err) => {
                 if (err.code === 400) {
@@ -37,8 +41,8 @@ export const legacyKickCommand = new CommandInteractionConstructor(
                 }
                 if (err.code === 500) {
                     return {
-                        status: 500,
-                        data: err,
+                        status: 500 as statusResponse,
+                        data: err as string,
                     };
                 }
                 console.log(err);

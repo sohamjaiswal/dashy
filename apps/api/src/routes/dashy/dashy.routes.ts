@@ -3,6 +3,6 @@ import { linkGuilded } from '../../controllers/dashy/dashy.controller';
 
 const router = Router();
 
-router.route('/').get(linkGuilded);
+router.route('/link').post(linkGuilded);
 
 export default router;

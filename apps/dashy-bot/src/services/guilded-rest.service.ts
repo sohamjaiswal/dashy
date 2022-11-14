@@ -1,15 +1,22 @@
 import {
+    ChatMessagePayload,
     RESTPostChannelMessagesBody,
     RESTPostChannelsBody,
 } from '@guildedjs/guilded-api-typings';
 
 import { Router } from '@guildedjs/rest';
+import { Message } from 'guilded.js';
 
 export class GuildedRestService {
     readonly router: Router;
 
     constructor(router: Router) {
         this.router = router;
+    }
+    deleteMessage(message: Message) {
+        message.delete().catch((err) => {
+            throw new Error(err);
+        });
     }
 
     createChannel = (data: RESTPostChannelsBody) => {
@@ -22,7 +29,10 @@ export class GuildedRestService {
 
     sendMessageToChannel = (
         channelId: string,
-        content: RESTPostChannelMessagesBody
+        content: Pick<
+            ChatMessagePayload,
+            'isPrivate' | 'replyMessageIds' | 'embeds' | 'isSilent'
+        > & { content?: string }
     ) => {
         return this.router.createChannelMessage(channelId, content);
     };
