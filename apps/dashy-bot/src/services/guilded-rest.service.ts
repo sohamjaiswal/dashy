@@ -1,6 +1,5 @@
 import {
     ChatMessagePayload,
-    RESTPostChannelMessagesBody,
     RESTPostChannelsBody,
 } from '@guildedjs/guilded-api-typings';
 

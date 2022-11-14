@@ -24,7 +24,7 @@ export interface IGuild {
 }
 
 export interface ILink {
-    dashyId: Schema.Types.ObjectId;
+    dashyId: string;
     guildedId: string;
 }
 

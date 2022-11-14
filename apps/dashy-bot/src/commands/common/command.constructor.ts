@@ -46,14 +46,14 @@ export class CommandInteractionConstructor {
                 .setDescription(`${res.data}`);
         }
         if (res.status === 9000) {
-            sendEmbed = (await embedHelper.successEmbed(client, message))
+            sendEmbed = (await embedHelper.errorEmbed(client, message))
                 .setTitle(`Oof: ${this.commandName}`)
                 .setDescription(
                     `You have encountered a special type of error, approach a developer to help.`
                 )
                 .addField('error', `${res.data}`);
         }
-        interactionResponseHandler(message, sendEmbed);
+        interactionResponseHandler(message, sendEmbed, res.private);
         return;
     };
 }

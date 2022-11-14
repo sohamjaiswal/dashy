@@ -1,31 +1,47 @@
 import { usersService } from '../services/users.service';
 import { statusResponse } from './command.types';
 import { CommandInteractionConstructor } from './common/command.constructor';
+import { guildedRestService } from '../main';
+import { isError } from '@dashy/utils';
+import { Schema } from 'mongoose';
 
-export const legacyBanCommand = new CommandInteractionConstructor(
+export const linkDashyCommand = new CommandInteractionConstructor(
     'link',
     async (client, message, args) => {
+        guildedRestService.deleteMessage(message);
         if (!args[0]) {
             return {
                 status: 400,
                 data: 'You must pass ID of user to link.',
+                private: true,
             };
         }
-        return usersService
-            .linkAccount(message.authorId, args[0])
-            .then((dashyUserData) => {
+        const res = await usersService.linkAccount(message.authorId, args[0]);
+        if (isError(res)) {
+            console.log('here');
+            if (res.error.status === 404) {
                 return {
-                    status: 200 as statusResponse,
-                    data: `Successfully linked \n Dashy Account: ${dashyUserData.username} \n Guilded Account: ${dashyUserData.guildedId}`,
+                    status: 400,
+                    data: 'There is no Dashy account with that ID...',
+                    private: true,
                 };
-            })
-            .catch((err) => {
-                console.log(err);
-                console.log(err);
+            }
+            if (res.error.status === 400) {
                 return {
-                    status: 9000,
-                    data: 'Unrecognized error',
+                    status: 400,
+                    data: 'You must provide an ID!',
+                    private: true,
                 };
-            });
+            }
+            return {
+                status: 9000,
+                data: '',
+            };
+        }
+        return {
+            status: 200,
+            data: `Successfully linked \n Guilded ID: ${res.guildedId} \n Dashy ID: ${res._id}`,
+            private: true,
+        };
     }
 );

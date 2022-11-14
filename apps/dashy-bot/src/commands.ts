@@ -5,6 +5,7 @@ import { disableHelper, enableHelper } from './commands/helper.command';
 import { giveHelpCommand } from './commands/help.command';
 import { legacyBanCommand } from './commands/ban.command';
 import { legacyKickCommand } from './commands/kick.command';
+import { linkDashyCommand } from './commands/link.command';
 
 export const commands: Commands = {
     ping: {
@@ -70,6 +71,15 @@ export const commands: Commands = {
             perms: 'owner',
             help: 'Kicks the member of provided id',
             args: ['userId'],
+        },
+    },
+    linkGuilded: {
+        alias: new Set([linkDashyCommand.commandName, 'lg']),
+        fn: linkDashyCommand.runCommand,
+        meta: {
+            perms: 'open',
+            help: 'Links your guilded account to your dashy account.',
+            args: ['DashyId'],
         },
     },
 };
