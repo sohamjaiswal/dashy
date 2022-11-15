@@ -4,6 +4,7 @@ import asyncHandler = require('express-async-handler');
 import mongoose from 'mongoose';
 import { UsersService } from '../../services/base-model.service';
 
+// TODO Create another unique identifier in this model that can be generated from the schema and used for verification
 export const linkGuilded = asyncHandler(async (req: Request, res: Response) => {
     const { guildedId, dashyId }: Partial<ILink> = req.body;
     const realDashyId = new mongoose.Types.ObjectId(dashyId);
