@@ -40,6 +40,10 @@ export class GuildedRestService {
         return this.router.banMember(serverId, userId);
     };
 
+    unbanMember = (serverId: string, userId: string) => {
+        return this.router.unbanMember(serverId, userId);
+    };
+
     kickMember = (serverId: string, userId: string) => {
         return this.router.kickMember(serverId, userId);
     };

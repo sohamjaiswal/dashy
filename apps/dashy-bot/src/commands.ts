@@ -3,7 +3,7 @@ import { prefixCommand } from './commands/prefix.command';
 import { Commands } from './router/command.router.types';
 import { disableHelper, enableHelper } from './commands/helper.command';
 import { giveHelpCommand } from './commands/help.command';
-import { legacyBanCommand } from './commands/ban.command';
+import { legacyBanCommand, legacyUnbanCommand } from './commands/ban.command';
 import { legacyKickCommand } from './commands/kick.command';
 import { linkDashyCommand, unlinkDashyCommand } from './commands/link.command';
 
@@ -61,6 +61,20 @@ export const commands: Commands = {
         meta: {
             perms: 'owner',
             help: 'Performs a native ban on the mentioned userId',
+            args: ['userId'],
+        },
+    },
+    lunbanish: {
+        alias: new Set([
+            legacyUnbanCommand.commandName,
+            'lunban',
+            'lUnoust',
+            'lUnevict',
+        ]),
+        fn: legacyUnbanCommand.runCommand,
+        meta: {
+            perms: 'owner',
+            help: 'Performs a native unban on the mentioned userId',
             args: ['userId'],
         },
     },
