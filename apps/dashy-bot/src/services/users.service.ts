@@ -1,7 +1,6 @@
 import { IUser } from '@dashy/api-interfaces';
 import { BACKEND_LOC } from '@dashy/secrets';
 import axios from 'axios';
-import { Schema } from 'mongoose';
 
 export class UsersService {
     linkAccount = async (guildedId: string, dashyId: string) => {

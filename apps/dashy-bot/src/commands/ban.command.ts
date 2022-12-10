@@ -12,7 +12,6 @@ export const legacyBanCommand = new CommandInteractionConstructor(
             };
         }
         if (!args[0]) {
-            console.log('arg not found');
             return {
                 status: 400 as statusResponse,
                 data: 'You must pass ID of user to ban.',
@@ -45,7 +44,6 @@ export const legacyBanCommand = new CommandInteractionConstructor(
                         data: err as string,
                     };
                 }
-                console.log(err);
                 return {
                     status: 9000 as statusResponse,
                     data: 'Unrecognized error',

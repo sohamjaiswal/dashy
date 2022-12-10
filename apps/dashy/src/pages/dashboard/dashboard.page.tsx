@@ -29,7 +29,7 @@ const DashboardPage = ({ logout, ...props }: IDashboardProps) => {
             setError(err);
         });
         const resUser = res.data;
-        console.log(resUser);
+
         setUser(resUser);
         setLoading(false);
         return;
@@ -42,7 +42,6 @@ const DashboardPage = ({ logout, ...props }: IDashboardProps) => {
 
     const handleLogout = async () => {
         const res = await logoutController();
-        console.log(res);
         setLoading(true);
         if (res.success) {
             setUser({});

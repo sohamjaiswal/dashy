@@ -1,9 +1,7 @@
 import { usersService } from '../services/users.service';
-import { statusResponse } from './command.types';
 import { CommandInteractionConstructor } from './common/command.constructor';
 import { guildedRestService } from '../main';
 import { isError } from '@dashy/utils';
-import { Schema } from 'mongoose';
 
 export const linkDashyCommand = new CommandInteractionConstructor(
     'link',
@@ -17,8 +15,8 @@ export const linkDashyCommand = new CommandInteractionConstructor(
             };
         }
         const res = await usersService.linkAccount(message.authorId, args[0]);
+        console.log(res);
         if (isError(res)) {
-            console.log('here');
             if (res.error.status === 404) {
                 return {
                     status: 400,
@@ -30,6 +28,13 @@ export const linkDashyCommand = new CommandInteractionConstructor(
                 return {
                     status: 400,
                     data: 'You must provide an ID!',
+                    private: true,
+                };
+            }
+            if (res.error.status === 409) {
+                return {
+                    status: 400,
+                    data: 'Guilded already linked to another account.',
                     private: true,
                 };
             }

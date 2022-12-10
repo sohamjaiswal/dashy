@@ -1,4 +1,4 @@
-import { FilterQuery, Model, Schema } from 'mongoose';
+import { FilterQuery, isValidObjectId, Model, Schema } from 'mongoose';
 import { IDbModelService } from '@dashy/api-interfaces';
 import { ErrorFormatter } from '../constants/errors';
 
@@ -43,7 +43,10 @@ export class BaseDbModelService<Interface>
         return matches;
     }
 
-    async findById(id: Schema.Types.ObjectId): Promise<Interface> {
+    async findById(id: string | Schema.Types.ObjectId): Promise<Interface> {
+        if (!isValidObjectId(id)) {
+            throw new Error(this.errors.notFound());
+        }
         const match = await this.model.findById(id).catch(() => {
             throw new Error(this.errors.internalError());
         });
@@ -52,10 +55,32 @@ export class BaseDbModelService<Interface>
     }
 
     async updateById(
-        id: Schema.Types.ObjectId,
+        id: string | Schema.Types.ObjectId,
         props: Partial<Interface>
     ): Promise<Interface> {
+        if (!isValidObjectId(id)) {
+            throw new Error(this.errors.notFound());
+        }
         const match = await this.model.findById(id).catch(() => {
+            throw new Error(this.errors.internalError());
+        });
+        if (!match) throw new Error(this.errors.notFound());
+        for (const key of Object.keys(props)) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            match[key] = props[key];
+        }
+        await match.save().catch(() => {
+            throw new Error(this.errors.internalError());
+        });
+        return match;
+    }
+
+    async updateOne(
+        query: FilterQuery<Interface>,
+        props: Partial<Interface>
+    ): Promise<Interface> {
+        const match = await this.model.findOne(query).catch(() => {
             throw new Error(this.errors.internalError());
         });
         if (!match) throw new Error(this.errors.notFound());

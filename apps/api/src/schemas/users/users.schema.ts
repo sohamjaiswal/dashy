@@ -3,6 +3,7 @@ import { model, Schema } from 'mongoose';
 
 import bcrypt = require('bcryptjs');
 import { mongooseErrorHandler } from '../../util/db/error-handler';
+import { NextFunction } from 'express';
 
 const UserSchema = new Schema({
     email: {
@@ -37,11 +38,12 @@ UserSchema.methods.validateCredentials = async function (password: string) {
 UserSchema.pre(
     /^save|updateOne|update|findOneAndUpdate/,
     { document: true, query: false },
-    async function () {
+    async function (next: NextFunction) {
         if (this.isModified('password')) {
             const salt = await bcrypt.genSalt(10);
             this.password = await bcrypt.hash(this.password, salt);
         }
+        next();
     }
 );
 

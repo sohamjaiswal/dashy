@@ -12,7 +12,6 @@ export const legacyKickCommand = new CommandInteractionConstructor(
             };
         }
         if (!args[0]) {
-            console.log('arg not found');
             return {
                 status: 400,
                 data: 'You must pass ID of user to kicked.',
@@ -45,7 +44,6 @@ export const legacyKickCommand = new CommandInteractionConstructor(
                         data: err as string,
                     };
                 }
-                console.log(err);
                 return {
                     status: 9000,
                     data: 'Unrecognized error',

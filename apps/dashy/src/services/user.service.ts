@@ -32,7 +32,6 @@ export class UsersService {
             .catch((err) => {
                 return err.response;
             });
-        console.log(res);
         return res;
     };
 

@@ -74,7 +74,7 @@ export const commands: Commands = {
         },
     },
     linkGuilded: {
-        alias: new Set([linkDashyCommand.commandName, 'lg']),
+        alias: new Set([linkDashyCommand.commandName, 'lg', 'gl']),
         fn: linkDashyCommand.runCommand,
         meta: {
             perms: 'open',

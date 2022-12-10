@@ -1,30 +1,36 @@
 import { ILink } from '@dashy/api-interfaces';
 import { Request, Response } from 'express';
 import asyncHandler = require('express-async-handler');
-import mongoose from 'mongoose';
+import { ErrorFormatter } from '../../constants/errors';
 import { UsersService } from '../../services/base-model.service';
 
-// TODO Create another unique identifier in this model that can be generated from the schema and used for verification
-// GHAHAHHAHA WHEN WILL I DO THISSSS
+const linkageErrorFormatter = new ErrorFormatter('Guilded Link');
+
 export const linkGuilded = asyncHandler(async (req: Request, res: Response) => {
     const { guildedId, dashyId }: Partial<ILink> = req.body;
-    const realDashyId = new mongoose.Types.ObjectId(dashyId);
     if (!(guildedId && dashyId)) {
-        res.sendStatus(400);
-        throw new Error('400::bad request data');
+        throw new Error(linkageErrorFormatter.badRequest());
     }
-    if (await UsersService.findById(realDashyId)) {
-        if (
-            (await UsersService.findOne({ guildedId })) ||
-            !(await UsersService.findById(realDashyId)).guildedId
-        ) {
-            res.sendStatus(409);
-            throw new Error(
-                '409::account already linked to another dashy account...'
-            );
+    if (await UsersService.findById(dashyId)) {
+        if ((await UsersService.findById(dashyId)).guildedId) {
+            throw new Error(linkageErrorFormatter.conflict());
         }
-        const user = await UsersService.updateById(realDashyId, { guildedId });
+        const user = await UsersService.updateById(dashyId, { guildedId });
         res.status(200).json(user);
     }
-    res.sendStatus(404);
+    throw new Error(linkageErrorFormatter.notFound());
 });
+
+export const unLinkGuilded = asyncHandler(
+    async (req: Request, res: Response) => {
+        const { guildedId }: Partial<ILink> = req.body;
+        if (!guildedId) {
+            throw new Error(linkageErrorFormatter.badRequest());
+        }
+        const user = await UsersService.updateOne(
+            { guildedId },
+            { guildedId: undefined }
+        );
+        res.status(200).json(user);
+    }
+);

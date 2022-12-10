@@ -3,6 +3,7 @@ export const errors = {
     401: 'Unauthorized',
     403: 'Forbidden',
     404: 'Not Found',
+    409: 'Conflict',
     500: 'Internal Error',
 };
 
@@ -27,6 +28,10 @@ export class ErrorFormatter {
 
     notFound() {
         return '404::' + this.context + ` ${errors[404]}`;
+    }
+
+    conflict() {
+        return '409::' + this.context + ` ${errors[409]}`;
     }
 
     internalError() {
