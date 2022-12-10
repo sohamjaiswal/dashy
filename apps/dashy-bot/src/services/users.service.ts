@@ -8,7 +8,16 @@ export class UsersService {
         const user = await axios
             .post<IUser>(`${BACKEND_LOC}/dashy/link`, data)
             .catch((err) => {
-                console.log();
+                return err.response;
+            });
+        return user.data;
+    };
+
+    unlinkAccount = async (guildedId: string) => {
+        const data = { guildedId };
+        const user = await axios
+            .post<IUser>(`${BACKEND_LOC}/dashy/unlink`, data)
+            .catch((err) => {
                 return err.response;
             });
         return user.data;

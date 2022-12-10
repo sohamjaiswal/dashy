@@ -5,7 +5,7 @@ import { disableHelper, enableHelper } from './commands/helper.command';
 import { giveHelpCommand } from './commands/help.command';
 import { legacyBanCommand } from './commands/ban.command';
 import { legacyKickCommand } from './commands/kick.command';
-import { linkDashyCommand } from './commands/link.command';
+import { linkDashyCommand, unlinkDashyCommand } from './commands/link.command';
 
 export const commands: Commands = {
     ping: {
@@ -80,6 +80,14 @@ export const commands: Commands = {
             perms: 'open',
             help: 'Links your guilded account to your dashy account.',
             args: ['DashyId'],
+        },
+    },
+    unlinkGuilded: {
+        alias: new Set([unlinkDashyCommand.commandName, 'ulg', 'ugl']),
+        fn: unlinkDashyCommand.runCommand,
+        meta: {
+            perms: 'open',
+            help: 'Unlinks your guilded account to your dashy account.',
         },
     },
 };

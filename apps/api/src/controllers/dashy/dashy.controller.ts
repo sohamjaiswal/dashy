@@ -21,7 +21,7 @@ export const linkGuilded = asyncHandler(async (req: Request, res: Response) => {
     throw new Error(linkageErrorFormatter.notFound());
 });
 
-export const unLinkGuilded = asyncHandler(
+export const unlinkGuilded = asyncHandler(
     async (req: Request, res: Response) => {
         const { guildedId }: Partial<ILink> = req.body;
         if (!guildedId) {

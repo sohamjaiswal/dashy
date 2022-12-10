@@ -50,3 +50,37 @@ export const linkDashyCommand = new CommandInteractionConstructor(
         };
     }
 );
+
+export const unlinkDashyCommand = new CommandInteractionConstructor(
+    'unlink',
+    async (client, message, args) => {
+        guildedRestService.deleteMessage(message);
+        const res = await usersService.unlinkAccount(message.authorId);
+        console.log(res);
+        if (isError(res)) {
+            if (res.error.status === 404) {
+                return {
+                    status: 400,
+                    data: 'There is no Dashy account linked to your ID...',
+                    private: true,
+                };
+            }
+            if (res.error.status === 400) {
+                return {
+                    status: 400,
+                    data: 'Your Guilded ID is sus... contact Dev.',
+                    private: true,
+                };
+            }
+            return {
+                status: 9000,
+                data: '',
+            };
+        }
+        return {
+            status: 200,
+            data: `Successfully unlinked \n Guilded ID: ${res.guildedId} \n Dashy ID: ${res._id}`,
+            private: true,
+        };
+    }
+);
